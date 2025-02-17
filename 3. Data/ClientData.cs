@@ -1,5 +1,6 @@
 ﻿using _3._Data.Context;
 using _3._Data.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +30,9 @@ namespace _3._Data
             }
         }
 
-        public List<Client> GetAll()
+        public async Task<List<Client>> GetAllAsycnc()
         {
-            return _minkaTradeBD.Clients.ToList();
+            return await _minkaTradeBD.Clients.ToListAsync();
         }
 
         public Client GetById(int id)

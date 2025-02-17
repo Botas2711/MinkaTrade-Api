@@ -11,7 +11,7 @@ namespace _3._Data
     {
         public Client GetById(int id);
         public Client GetByPhoneNumber(string phoneNumber);
-        public List<Client> GetAll();
+        public Task<List<Client>> GetAllAsycnc();
         public bool Create(Client client);
         public bool Update(Client client, int id);
     }

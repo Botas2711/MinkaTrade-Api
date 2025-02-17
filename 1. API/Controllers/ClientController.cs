@@ -27,9 +27,9 @@ namespace _1._API.Controllers
 
         // GET: api/<ClientController>
         [HttpGet]
-        public List<ClientResponse> Get()
+        public async Task<List<ClientResponse>> GetAsync()
         {
-            var clients = _clientData.GetAll();
+            var clients = await _clientData.GetAllAsycnc();
             var response = _mapper.Map<List<Client>, List<ClientResponse>>(clients);
             return response;
         }
