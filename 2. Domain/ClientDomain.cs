@@ -17,6 +17,11 @@ namespace _2._Domain
         }
         public bool Create(Client client)
         {
+            if(client.phone_number.Length != 9)
+            {
+                throw new Exception("The phone number must have exactly 9 numbers");
+            }
+
             var clientExiste = _clientData.GetByPhoneNumber(client.phone_number);
 
             if (clientExiste == null)
