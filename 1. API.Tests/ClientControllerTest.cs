@@ -1,7 +1,7 @@
 ﻿using _1._API.Controllers;
 using _1._API.Response;
 using _2._Domain;
-using _3._Data;
+using _3._Data.Clients;
 using _3._Data.Model;
 using AutoMapper;
 using NSubstitute;
@@ -66,7 +66,6 @@ namespace _1._API.Tests
             _clientDataMock.GetAllAsycnc().Returns(Task.FromResult(clients));
 
             // Moq Mapper
-
             List<ClientResponse> clientsResponse = new List<ClientResponse>();
             clientsResponse.Add(new ClientResponse
             {

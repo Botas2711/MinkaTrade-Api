@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _3._Data
+namespace _3._Data.Clients
 {
     public interface IClientData
     {

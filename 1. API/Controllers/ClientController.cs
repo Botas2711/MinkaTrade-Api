@@ -1,7 +1,7 @@
 ﻿using _1._API.Request;
 using _1._API.Response;
 using _2._Domain;
-using _3._Data;
+using _3._Data.Clients;
 using _3._Data.Model;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;

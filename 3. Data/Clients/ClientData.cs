@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _3._Data
+namespace _3._Data.Clients
 {
     public class ClientData : IClientData
     {
         private MinkaTradeBD _minkaTradeBD;
         public ClientData(MinkaTradeBD minkaTradeBD)
         {
-            this._minkaTradeBD = minkaTradeBD;
+            _minkaTradeBD = minkaTradeBD;
         }
         public bool Create(Client client)
         {
@@ -24,7 +24,7 @@ namespace _3._Data
                 _minkaTradeBD.SaveChanges();
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
