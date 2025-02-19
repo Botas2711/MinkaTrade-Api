@@ -1,8 +1,16 @@
 using _1._API.Mapper;
-using _2._Domain;
+using _2._Domain.Clients;
+using _2._Domain.Exceptions;
 using _3._Data.Clients;
 using _3._Data.Context;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
+using System.Text.Json;
+using Microsoft.AspNetCore.Diagnostics;
+using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
+using _1._API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +55,9 @@ using (var context = scope.ServiceProvider.GetService<MinkaTradeBD>())
 }
 
 // Configure the HTTP request pipeline.
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

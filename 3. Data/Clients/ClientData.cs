@@ -16,11 +16,23 @@ namespace _3._Data.Clients
         {
             _minkaTradeBD = minkaTradeBD;
         }
-        public bool Create(Client client)
+        public async Task<bool> ActivatePremium(int id)
         {
             try
             {
-                _minkaTradeBD.Clients.Add(client);
+                Client clientToUpdate = await GetByIdAsync(id);
+                if (clientToUpdate == null)
+                {
+                    return false;
+                }
+
+                if (clientToUpdate.hasPremiun)
+                {
+                    return false;
+                }
+
+                clientToUpdate.hasPremiun = true;
+                _minkaTradeBD.Update(clientToUpdate);
                 _minkaTradeBD.SaveChanges();
                 return true;
             }
@@ -30,26 +42,66 @@ namespace _3._Data.Clients
             }
         }
 
+        public async Task<bool> CreateAsync(Client client)
+        {
+            try
+            {
+                await _minkaTradeBD.Clients.AddAsync(client);
+                await _minkaTradeBD.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+
         public async Task<List<Client>> GetAllAsycnc()
         {
             return await _minkaTradeBD.Clients.ToListAsync();
         }
 
-        public Client GetById(int id)
+        public async Task<Client> GetByDniAsync(Client client, bool accion)
         {
-            return _minkaTradeBD.Clients.Where(p => p.Id == id).First();
+            // Si accion es true significa que estamos actualizando
+            if (accion)
+            {
+                return await _minkaTradeBD.Clients.Where(p => p.dni == client.dni && p.Id != client.Id).FirstOrDefaultAsync();
+            }
+            return await _minkaTradeBD.Clients.Where(p => p.dni == client.dni).FirstOrDefaultAsync();
         }
 
-        public Client GetByPhoneNumber(string phoneNumber)
+        public async Task<Client> GetByEmailAsync(Client client, bool accion)
         {
-            return _minkaTradeBD.Clients.Where(p => p.phone_number == phoneNumber).FirstOrDefault();
+            // Si accion es true significa que estamos actualizando
+            if (accion)
+            {
+                return await _minkaTradeBD.Clients.Where(p => p.email == client.email && p.Id != client.Id).FirstOrDefaultAsync();
+            }
+            return await _minkaTradeBD.Clients.Where(p => p.email == client.email).FirstOrDefaultAsync();
         }
 
-        public bool Update(Client client, int id)
+        public async Task<Client> GetByIdAsync(int id)
+        {
+            return await _minkaTradeBD.Clients.Where(p => p.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<Client> GetByPhoneNumberAsync(Client client, bool accion)
+        {
+            if (accion)
+            {
+                return await _minkaTradeBD.Clients.Where(p => p.phone_number == client.phone_number && p.Id != client.Id).FirstOrDefaultAsync();
+            }
+            return await _minkaTradeBD.Clients.Where(p => p.phone_number == client.phone_number).FirstOrDefaultAsync();
+        }
+
+
+        public async Task<bool> UpdateAsync(Client client, int id)
         {
             try
             {
-                var clientToUpdate = _minkaTradeBD.Clients.Where(p => p.Id == id).First();
+                Client clientToUpdate = await GetByIdAsync(id);
 
                 clientToUpdate.first_name = client.first_name;
                 clientToUpdate.last_name = client.last_name;

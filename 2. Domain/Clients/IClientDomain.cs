@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace _2._Domain
+namespace _2._Domain.Clients
 {
     public interface IClientDomain
     {
-        public bool Create(Client client);
-        public bool Update(Client client, int id);
+        public Task<bool> CreateAsync(Client client);
+        public Task<bool> UpdateAsync(Client client, int id);
     }
 }

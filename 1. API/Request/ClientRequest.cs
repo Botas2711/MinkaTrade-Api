@@ -16,7 +16,6 @@ namespace _1._API.Request
         public DateTime birthdate { get; set; }
 
         [Required]
-        [MaxLength(8)]
         public string dni { get; set; }
 
         [Required]
@@ -28,7 +27,6 @@ namespace _1._API.Request
         public string email { get; set; }
 
         [Required]
-        [MaxLength(9)]
         public string phone_number { get; set; }
     }
 }

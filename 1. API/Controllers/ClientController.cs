@@ -1,6 +1,6 @@
 ﻿using _1._API.Request;
 using _1._API.Response;
-using _2._Domain;
+using _2._Domain.Clients;
 using _3._Data.Clients;
 using _3._Data.Model;
 using AutoMapper;
@@ -36,34 +36,24 @@ namespace _1._API.Controllers
 
         // GET api/<ClientController>/5
         [HttpGet("{id}")]
-        public Client Get(int id)
+        public async Task<Client> Get(int id)
         {
-            return _clientData.GetById(id);
+            return await _clientData.GetByIdAsync(id);
         }
 
         // POST api/<ClientController>
         [HttpPost]
-        public IActionResult Post([FromBody] ClientRequest request)
+        public async Task<IActionResult> Post([FromBody] ClientRequest request)
         {
-            if(ModelState.IsValid )
+            if (ModelState.IsValid)
             {
-                //Client client = new Client
-                //{
-                //    first_name = request.first_name,
-                //    last_name = request.last_name,
-                //    birthdate = request.birthdate,
-                //    dni = request.dni,
-                //    email = request.email,
-                //    phone_number = request.phone_number,
-                //    gender = request.gender,
-                //};
                 var client = _mapper.Map<ClientRequest, Client>(request);
-               
-                return Ok(_clientDomain.Create(client));
+                return Ok(_clientDomain.CreateAsync(client));
+
             }
             else
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
         }
 
@@ -81,8 +71,9 @@ namespace _1._API.Controllers
                 phone_number = request.phone_number,
                 gender = request.gender,
             };
+            return true;
 
-            return _clientDomain.Update(client, id);
+            //return _clientDomain.Update(client, id);
         }
 
         // DELETE api/<ClientController>/5

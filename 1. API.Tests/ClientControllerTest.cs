@@ -1,6 +1,6 @@
 ﻿using _1._API.Controllers;
 using _1._API.Response;
-using _2._Domain;
+using _2._Domain.Clients;
 using _3._Data.Clients;
 using _3._Data.Model;
 using AutoMapper;

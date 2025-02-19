@@ -1,4 +1,5 @@
-﻿using _3._Data.Clients;
+﻿using _2._Domain.Clients;
+using _3._Data.Clients;
 using _3._Data.Model;
 using NSubstitute;
 using System;
@@ -16,7 +17,7 @@ namespace _2._Domain.Tests
         [InlineData("Test1", "Client1", "M", "2002-05-23", "example1@gmail.com", "10345678", "907456321")]
         [InlineData("Test2", "Client2", "F", "2004-10-01", "example2@gmail.com", "12305678", "987456021")]
         [InlineData("Test3", "Client3", "M", "2008-09-11", "example3@gmail.com", "12115678", "987456360")]
-        public void Create_ValidClient_ResultTrue(string first_name, string last_name, string gender, string birthdate, string email, string dni, string phone_number)
+        public async Task Create_ValidClient_ResultTrueAsync(string first_name, string last_name, string gender, string birthdate, string email, string dni, string phone_number)
         {
             //Arrange
             Client client = new Client
@@ -34,12 +35,13 @@ namespace _2._Domain.Tests
             // Usamos Mock
             var clientDataMock = Substitute.For<IClientData>();
 
-            clientDataMock.GetByPhoneNumber(client.phone_number).Returns((Client)null);
-            clientDataMock.Create(client).Returns(true);
+            clientDataMock.GetByPhoneNumberAsync(client, false).Returns(Task.FromResult<Client>(null));
+
+            clientDataMock.CreateAsync(client).Returns(true);
             ClientDomain clientDomian = new ClientDomain(clientDataMock);
 
             //Act
-            var actualResult = clientDomian.Create(client);
+            var actualResult =  await clientDomian.CreateAsync(client);
 
             //Assert
             Assert.True(actualResult);
@@ -50,7 +52,7 @@ namespace _2._Domain.Tests
         [InlineData("9074561")]
         [InlineData("9874560211")]
         [InlineData("987456")]
-        public void Create_InvalidPhoneNumber_ResultFalse(string phone_number)
+        public async Task Create_InvalidPhoneNumber_ResultFalseAsync(string phone_number)
         {
             //Arrange
             Client client = new Client
@@ -63,15 +65,15 @@ namespace _2._Domain.Tests
             // Usamos Mock
             var clientDataMock = Substitute.For<IClientData>();
 
-            clientDataMock.GetByPhoneNumber(client.phone_number).Returns((Client)null);
-            clientDataMock.Create(client).Returns(true);
+            clientDataMock.GetByPhoneNumberAsync(client, false).Returns(Task.FromResult<Client>(null));
+            clientDataMock.CreateAsync(client).Returns(true);
             ClientDomain clientDomian = new ClientDomain(clientDataMock);
 
             //Act
-            Action act = () => clientDomian.Create(client);
+            Func<Task> act = async () => await clientDomian.CreateAsync(client);
 
             //Assert
-            Assert.Throws<Exception>(act);
+            await Assert.ThrowsAsync<Exception>(act);
         }
     }
 }
