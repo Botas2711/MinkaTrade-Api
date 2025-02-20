@@ -13,6 +13,9 @@ namespace _1._API.Mapper
             // de Client a ClientRequest
             CreateMap<Client, ClientRequest>();
             CreateMap<Client, ClientResponse>();
+
+            CreateMap<Category, CategoryRequest>();
+            CreateMap<Category, CategoryResponse>();
         }
     }
 }

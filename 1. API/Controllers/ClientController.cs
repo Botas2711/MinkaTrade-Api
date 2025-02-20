@@ -38,7 +38,7 @@ namespace _1._API.Controllers
         [HttpGet("{id}")]
         public async Task<ClientResponse> Get(int id)
         {
-            var client = await _clientData.GetByIdAsync(id);
+            var client = await _clientDomain.GetByIdAsync(id);
             var response = _mapper.Map<Client, ClientResponse>(client);
             return response;
         }
@@ -75,7 +75,7 @@ namespace _1._API.Controllers
             }
         }
 
-        // PUT api/<ClientController>/5
+        // PUT api/<ClientController>/ActivePremiun/5
         [HttpPut("ActivePremiun/{id}")]
         public async Task<IActionResult> ActivePremiun(int id)
         {

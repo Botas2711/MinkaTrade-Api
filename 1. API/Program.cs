@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Diagnostics;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using _1._API.Middleware;
+using _3._Data.Categories;
+using _2._Domain.Categories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IClientData, ClientData>();
 builder.Services.AddScoped<IClientDomain, ClientDomain>();
+
+builder.Services.AddScoped<ICategoryData, CategoryData>();
+builder.Services.AddScoped<ICategoryDomain, CategoryDomain>();
 
 // Cadena de conexion
 var ConnectionString = builder.Configuration.GetConnectionString("MinkaTradeBD");

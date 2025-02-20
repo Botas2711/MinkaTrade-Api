@@ -29,7 +29,7 @@ namespace _2._Domain.Clients
         {
             if (string.IsNullOrWhiteSpace(client.phone_number) || client.phone_number.Length != 9)
             {
-                throw new InvalidActionException("The phone number must have exactly 9 numbers.");
+                throw new InvalidActionException("The phone number must have exactly 9 numbers");
             }
 
             if (string.IsNullOrWhiteSpace(client.dni) || client.dni.Length != 8)
@@ -53,7 +53,7 @@ namespace _2._Domain.Clients
 
             if (clientExistePhoneNumber != null)
             {
-                throw new DuplicateDataException("A client with this phone number already exists.");
+                throw new DuplicateDataException("A client with this phone number already exists");
             }
 
             if (clientExisteEmail != null)
@@ -74,7 +74,7 @@ namespace _2._Domain.Clients
         {
             if (string.IsNullOrWhiteSpace(client.phone_number) || client.phone_number.Length != 9)
             {
-                throw new InvalidActionException("The phone number must have exactly 9 numbers.");
+                throw new InvalidActionException("The phone number must have exactly 9 numbers");
             }
 
             if (string.IsNullOrWhiteSpace(client.dni) || client.dni.Length != 8)
@@ -128,6 +128,16 @@ namespace _2._Domain.Clients
             }
 
             return await _clientData.ActivatePremiumAsync(id);
+        }
+
+        public async Task<Client> GetByIdAsync(int id)
+        {
+            var clientExiste = await _clientData.GetByIdAsync(id);
+            if (clientExiste == null)
+            {
+                throw new NotFoundException("The client was not found");
+            }
+            return await _clientData.GetByIdAsync(id);
         }
     }
 }
