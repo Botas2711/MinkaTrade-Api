@@ -16,21 +16,11 @@ namespace _3._Data.Clients
         {
             _minkaTradeBD = minkaTradeBD;
         }
-        public async Task<bool> ActivatePremium(int id)
+        public async Task<bool> ActivatePremiumAsync(int id)
         {
             try
             {
                 Client clientToUpdate = await GetByIdAsync(id);
-                if (clientToUpdate == null)
-                {
-                    return false;
-                }
-
-                if (clientToUpdate.hasPremiun)
-                {
-                    return false;
-                }
-
                 clientToUpdate.hasPremiun = true;
                 _minkaTradeBD.Update(clientToUpdate);
                 _minkaTradeBD.SaveChanges();

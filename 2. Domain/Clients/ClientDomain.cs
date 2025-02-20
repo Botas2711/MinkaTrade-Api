@@ -18,18 +18,52 @@ namespace _2._Domain.Clients
         {
             _clientData = clientData;
         }
-
+        private int CalculateAge(DateTime birthdate)
+        {
+            var today = DateTime.Today;
+            var age = today.Year - birthdate.Year;
+            if (birthdate.Date > today.AddYears(-age)) age--;
+            return age;
+        }
         public async Task<bool> CreateAsync(Client client)
         {
-            if (client.phone_number.Length != 9)
+            if (string.IsNullOrWhiteSpace(client.phone_number) || client.phone_number.Length != 9)
             {
                 throw new InvalidActionException("The phone number must have exactly 9 numbers.");
             }
 
-            var clientExiste = await _clientData.GetByPhoneNumberAsync(client, false);
-            if (clientExiste != null)
+            if (string.IsNullOrWhiteSpace(client.dni) || client.dni.Length != 8)
+            {
+                throw new InvalidActionException("The DNI must have exactly 8 numbers");
+            }
+
+            if (string.IsNullOrWhiteSpace(client.gender) || client.gender.Length != 1)
+            {
+                throw new InvalidActionException("The gender must be exactly 1 character long");
+            }
+
+            if(CalculateAge(client.birthdate) < 18)
+            {
+                throw new InvalidActionException("The client must be at least 18 years old");
+            }
+
+            var clientExistePhoneNumber = await _clientData.GetByPhoneNumberAsync(client, false);
+            var clientExisteEmail = await _clientData.GetByEmailAsync(client, false);
+            var clientExisteDni = await _clientData.GetByDniAsync(client, false);
+
+            if (clientExistePhoneNumber != null)
             {
                 throw new DuplicateDataException("A client with this phone number already exists.");
+            }
+
+            if (clientExisteEmail != null)
+            {
+                throw new DuplicateDataException("A client with this email is already registered");
+            }
+
+            if (clientExisteDni != null)
+            {
+                throw new DuplicateDataException("A client with this DNI is already registered");
             }
 
             return await _clientData.CreateAsync(client);
@@ -38,45 +72,62 @@ namespace _2._Domain.Clients
 
         public async Task<bool> UpdateAsync(Client client, int id)
         {
-            if (client.dni.Length != 8)
+            if (string.IsNullOrWhiteSpace(client.phone_number) || client.phone_number.Length != 9)
             {
-                throw new Exception("The DNI must have exactly 8 numbers");
+                throw new InvalidActionException("The phone number must have exactly 9 numbers.");
             }
 
-            if (client.phone_number.Length != 9)
+            if (string.IsNullOrWhiteSpace(client.dni) || client.dni.Length != 8)
             {
-                throw new Exception("The phone number must have exactly 9 numbers");
+                throw new InvalidActionException("The DNI must have exactly 8 numbers");
             }
 
-            var clientExistePhoneNumber = _clientData.GetByPhoneNumberAsync(client, true);
-            var clientExisteEmail = _clientData.GetByEmailAsync(client, true);
-            var clientExisteDni = _clientData.GetByDniAsync(client, true);
+            if (string.IsNullOrWhiteSpace(client.gender) || client.gender.Length != 1)
+            {
+                throw new InvalidActionException("The gender must be exactly 1 character long");
+            }
+
+            if (CalculateAge(client.birthdate) < 18)
+            {
+                throw new InvalidActionException("The client must be at least 18 years old");
+            }
+
+            var clientExistePhoneNumber = await _clientData.GetByPhoneNumberAsync(client, true);
+            var clientExisteEmail = await _clientData.GetByEmailAsync(client, true);
+            var clientExisteDni = await _clientData.GetByDniAsync(client, true);
 
             if (clientExistePhoneNumber != null && clientExistePhoneNumber.Id != id)
             {
-                throw new Exception("The email is already registered");
+                throw new DuplicateDataException("A client with this phone number already exists");
             }
 
             if (clientExisteEmail != null && clientExisteEmail.Id != id)
             {
-                throw new Exception("The email is already registered");
+                throw new DuplicateDataException("A client with this email is already registered");
             }
 
             if (clientExisteDni != null && clientExisteDni.Id != id)
             {
-                throw new Exception("The DNI is already registered");
+                throw new DuplicateDataException("A client with this DNI is already registered");
             }
 
-            if ((clientExistePhoneNumber == null || clientExistePhoneNumber.Id == id) &&
-                (clientExisteEmail == null || clientExisteEmail.Id == id) &&
-                (clientExisteDni == null || clientExisteDni.Id == id))
+            return await _clientData.UpdateAsync(client, id);
+        }
+
+        public async Task<bool> ActivatePremiumAsync(int id)
+        {
+            var clientExiste = await _clientData.GetByIdAsync(id);
+            if(clientExiste == null)
             {
-                return await _clientData.UpdateAsync(client, id);
+                throw new NotFoundException("The client was not found");
             }
-            else
+
+            if(clientExiste != null && clientExiste.hasPremiun == true)
             {
-                return false;
+                throw new InvalidActionException("The client already has a premium plan");
             }
+
+            return await _clientData.ActivatePremiumAsync(id);
         }
     }
 }

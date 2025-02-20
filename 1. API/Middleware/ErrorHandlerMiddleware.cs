@@ -1,6 +1,7 @@
 ﻿using _2._Domain.Exceptions;
 using System.Net;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace _1._API.Middleware
 {
@@ -30,9 +31,9 @@ namespace _1._API.Middleware
 
                 var statusCode = error switch
                 {
-                    DuplicateDataException => (int)HttpStatusCode.Conflict,  // 409
-                    InvalidActionException => (int)HttpStatusCode.UnprocessableEntity,  // 422
-                    KeyNotFoundException => (int)HttpStatusCode.NotFound,  // 404
+                    DuplicateDataException => (int)HttpStatusCode.Conflict, // 409
+                    InvalidActionException => (int)HttpStatusCode.UnprocessableEntity, // 422
+                    NotFoundException => (int)HttpStatusCode.NotFound, // 404
                     _ => (int)HttpStatusCode.InternalServerError // 500
                 };
 
@@ -40,18 +41,18 @@ namespace _1._API.Middleware
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                     WriteIndented = true,
-                    DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
+                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
                 };
 
-                var result = JsonSerializer.Serialize(new
+                var errorResponse = new
                 {
                     statusCode,
                     message = error?.Message,
                     errorType = error.GetType().Name
-                }, options);
+                };
 
                 response.StatusCode = statusCode;
-                await response.WriteAsync(result);
+                await response.WriteAsync(JsonSerializer.Serialize(errorResponse, options));
             }
         }
     }

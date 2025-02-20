@@ -36,9 +36,11 @@ namespace _1._API.Controllers
 
         // GET api/<ClientController>/5
         [HttpGet("{id}")]
-        public async Task<Client> Get(int id)
+        public async Task<ClientResponse> Get(int id)
         {
-            return await _clientData.GetByIdAsync(id);
+            var client = await _clientData.GetByIdAsync(id);
+            var response = _mapper.Map<Client, ClientResponse>(client);
+            return response;
         }
 
         // POST api/<ClientController>
@@ -48,8 +50,8 @@ namespace _1._API.Controllers
             if (ModelState.IsValid)
             {
                 var client = _mapper.Map<ClientRequest, Client>(request);
-                return Ok(_clientDomain.CreateAsync(client));
-
+                var result = await _clientDomain.CreateAsync(client);
+                return Ok(result);
             }
             else
             {
@@ -59,27 +61,33 @@ namespace _1._API.Controllers
 
         // PUT api/<ClientController>/5
         [HttpPut("{id}")]
-        public bool Put(int id, [FromBody] ClientRequest request)
+        public async Task<IActionResult> Put(int id, [FromBody] ClientRequest request)
         {
-            Client client = new Client
+            if (ModelState.IsValid)
             {
-                first_name = request.first_name,
-                last_name = request.last_name,
-                birthdate = request.birthdate,
-                dni = request.dni,
-                email = request.email,
-                phone_number = request.phone_number,
-                gender = request.gender,
-            };
-            return true;
-
-            //return _clientDomain.Update(client, id);
+                var client = _mapper.Map<ClientRequest, Client>(request);
+                var result = await _clientDomain.UpdateAsync(client, id);
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
-        // DELETE api/<ClientController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // PUT api/<ClientController>/5
+        [HttpPut("ActivePremiun/{id}")]
+        public async Task<IActionResult> ActivePremiun(int id)
         {
+            if (id != null && id > 0)
+            {
+                var result = await _clientDomain.ActivatePremiumAsync(id);
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }
