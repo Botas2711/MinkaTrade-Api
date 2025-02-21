@@ -72,6 +72,8 @@ namespace _2._Domain.Clients
 
         public async Task<bool> UpdateAsync(Client client, int id)
         {
+            await GetByIdAsync(id);
+
             if (string.IsNullOrWhiteSpace(client.phone_number) || client.phone_number.Length != 9)
             {
                 throw new InvalidActionException("The phone number must have exactly 9 numbers");
@@ -116,12 +118,7 @@ namespace _2._Domain.Clients
 
         public async Task<bool> ActivatePremiumAsync(int id)
         {
-            var clientExiste = await _clientData.GetByIdAsync(id);
-            if(clientExiste == null)
-            {
-                throw new NotFoundException("The client was not found");
-            }
-
+            var clientExiste = await GetByIdAsync(id);
             if(clientExiste != null && clientExiste.hasPremiun == true)
             {
                 throw new InvalidActionException("The client already has a premium plan");
@@ -132,12 +129,16 @@ namespace _2._Domain.Clients
 
         public async Task<Client> GetByIdAsync(int id)
         {
+            if (id <= 0)
+            {
+                throw new InvalidActionException("The id is invalid");
+            }
             var clientExiste = await _clientData.GetByIdAsync(id);
             if (clientExiste == null)
             {
                 throw new NotFoundException("The client was not found");
             }
-            return await _clientData.GetByIdAsync(id);
+            return clientExiste;
         }
     }
 }

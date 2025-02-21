@@ -16,6 +16,12 @@ namespace _1._API.Mapper
 
             CreateMap<Category, CategoryRequest>();
             CreateMap<Category, CategoryResponse>();
+
+            CreateMap<PostImage, PostImageRequest>();
+            CreateMap<PostImage, PostImageResponse>();
+
+            CreateMap<Post, PostRequest>();
+            CreateMap<Post, PostResponse>();
         }
     }
 }

@@ -46,7 +46,6 @@ namespace _3._Data.Clients
             }
         }
 
-
         public async Task<List<Client>> GetAllAsycnc()
         {
             return await _minkaTradeBD.Clients.ToListAsync();

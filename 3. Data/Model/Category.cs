@@ -11,6 +11,6 @@ namespace _3._Data.Model
         public int Id { get; set; }
         public string Name { get; set; }
 
-        List<Post> Posts { get; set; } = new List<Post>();
+        public List<Post> Posts { get; set; } = new List<Post>();
     }
 }

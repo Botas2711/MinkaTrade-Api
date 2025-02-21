@@ -20,5 +20,7 @@ namespace _3._Data.Model
         public string phone_number { get; set; }
         public byte[]? profile_picture { get; set; }
         public bool hasPremiun { get; set; }
+
+        public List<Post> Posts { get; set; } = new List<Post>();
     }
 }

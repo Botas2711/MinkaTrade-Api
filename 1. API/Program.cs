@@ -13,6 +13,10 @@ using System.ComponentModel.DataAnnotations;
 using _1._API.Middleware;
 using _3._Data.Categories;
 using _2._Domain.Categories;
+using _3._Data.PostImages;
+using _2._Domain.PostImages;
+using _3._Data.Posts;
+using _2._Domain.Posts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +32,12 @@ builder.Services.AddScoped<IClientDomain, ClientDomain>();
 
 builder.Services.AddScoped<ICategoryData, CategoryData>();
 builder.Services.AddScoped<ICategoryDomain, CategoryDomain>();
+
+builder.Services.AddScoped<IPostImageData, PostImageData>();
+builder.Services.AddScoped<IPostImageDomain, PostImageDomain>();
+
+builder.Services.AddScoped<IPostData, PostData>();
+builder.Services.AddScoped<IPostDomain, PostDomain>();
 
 // Cadena de conexion
 var ConnectionString = builder.Configuration.GetConnectionString("MinkaTradeBD");

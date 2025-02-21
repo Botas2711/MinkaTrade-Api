@@ -75,8 +75,8 @@ namespace _1._API.Controllers
             }
         }
 
-        // PUT api/<ClientController>/ActivePremiun/5
-        [HttpPut("ActivePremiun/{id}")]
+        // PUT api/<ClientController>/activePremiun/5
+        [HttpPut("activePremiun/{id}")]
         public async Task<IActionResult> ActivePremiun(int id)
         {
             if (id != null && id > 0)

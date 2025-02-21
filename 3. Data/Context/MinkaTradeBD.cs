@@ -76,6 +76,10 @@ namespace _3._Data.Context
             builder.Entity<PostImage>().Property(p => p.Id).ValueGeneratedOnAdd();
             builder.Entity<PostImage>().Property(p => p.Images)
                 .IsRequired();
+
+            //Relation
+            builder.Entity<PostImage>().HasOne(pi => pi.Post).WithMany(p => p.PostImages)
+                .HasForeignKey(pi => pi.PostId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

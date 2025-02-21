@@ -30,6 +30,10 @@ namespace _2._Domain.Categories
 
         public async Task<Category> GetByIdAsync(int id)
         {
+            if (id <= 0)
+            {
+                throw new InvalidActionException("The id is invalid");
+            }
             var categoryExiste = await _categoryData.GetByIdAsync(id);
             if (categoryExiste == null)
             {
@@ -40,6 +44,7 @@ namespace _2._Domain.Categories
 
         public async Task<bool> UpdateAsync(Category category, int id)
         {
+            await GetByIdAsync(id);
             var categoryExiste = await _categoryData.GetByName(category, true);
             if (categoryExiste != null && categoryExiste.Id != id)
             {

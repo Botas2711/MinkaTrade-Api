@@ -1,9 +1,7 @@
 ﻿using _1._API.Request;
 using _1._API.Response;
 using _2._Domain.Categories;
-using _2._Domain.Clients;
 using _3._Data.Categories;
-using _3._Data.Clients;
 using _3._Data.Model;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +27,7 @@ namespace _1._API.Controllers
 
         // GET: api/<CategoryController>
         [HttpGet]
-        public async Task<List<CategoryResponse>> Get()
+        public async Task<List<CategoryResponse>> GetAll()
         {
             var categories = await _categoryData.GetAllAsycnc();
             var response = _mapper.Map<List<Category>, List<CategoryResponse>>(categories);

@@ -16,7 +16,7 @@ namespace _3._Data.Model
         public DateTime created_date { get; set; }
         public DateTime? updated_date { get; set;}
 
-        List <PostImage> postImages { get; set; }
+        public List <PostImage> PostImages { get; set; } = new List<PostImage>();
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public int ClientId { get; set; }

@@ -9,7 +9,12 @@ namespace _1._API.Mapper
         public APIToModel() 
         {
             CreateMap<ClientRequest, Client>();
+
             CreateMap<CategoryRequest, Category>();
+
+            CreateMap<PostImageRequest, PostImage>();
+
+            CreateMap<PostRequest, Post>();
         }
     }
 }
