@@ -4,30 +4,30 @@ namespace _1._API.Request
 {
     public class ClientRequest
     {
-        [Required(ErrorMessage = "The first_name is required")]
+        [Required(ErrorMessage = "The FirstName is required")]
         [MaxLength(80)]
-        public string first_name { get; set; }
+        public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "The last_name is required")]
+        [Required(ErrorMessage = "The LastName is required")]
         [MaxLength(120)]
-        public string last_name { get; set; }
+        public string LastName { get; set; }
 
-        [Required(ErrorMessage = "The birthdate is required")]
-        public DateTime birthdate { get; set; }
+        [Required(ErrorMessage = "The Birthdate is required")]
+        public DateTime Birthdate { get; set; }
 
-        [Required(ErrorMessage = "The dni is required")]
-        public string dni { get; set; }
+        [Required(ErrorMessage = "The Dni is required")]
+        public string Dni { get; set; }
 
-        [Required(ErrorMessage = "The gender is required")]
+        [Required(ErrorMessage = "The Gender is required")]
         [MaxLength(1)]
-        public string gender { get; set; }
+        public string Gender { get; set; }
 
-        [Required(ErrorMessage = "The email is required")]
-        [EmailAddress(ErrorMessage = "Invalid email format")]
+        [Required(ErrorMessage = "The Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email format")]
         [MaxLength(150)]
-        public string email { get; set; }
+        public string Email { get; set; }
 
-        [Required(ErrorMessage = "The phone_number is required")]
-        public string phone_number { get; set; }
+        [Required(ErrorMessage = "The PhoneNumber is required")]
+        public string PhoneNumber { get; set; }
     }
 }

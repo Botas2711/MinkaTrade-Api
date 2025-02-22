@@ -22,7 +22,7 @@ namespace _2._Domain.Reviews
 
         public async Task<bool> CreateAsync(Review review)
         {
-            if(review.rate <= 0)
+            if(review.Rate <= 0)
             {
                 throw new InvalidActionException("The rate must be greater than 0");
             }
@@ -70,7 +70,7 @@ namespace _2._Domain.Reviews
         public async Task<bool> UpdateAsync(Review review, int id)
         {
             await GetByIdAsync(id);
-            if (review.rate <= 0)
+            if (review.Rate <= 0)
             {
                 throw new InvalidActionException("The rate must be greater than 0");
             }

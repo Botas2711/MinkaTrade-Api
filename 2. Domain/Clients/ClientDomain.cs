@@ -27,22 +27,22 @@ namespace _2._Domain.Clients
         }
         public async Task<bool> CreateAsync(Client client)
         {
-            if (string.IsNullOrWhiteSpace(client.phone_number) || client.phone_number.Length != 9)
+            if (string.IsNullOrWhiteSpace(client.PhoneNumber) || client.PhoneNumber.Length != 9)
             {
                 throw new InvalidActionException("The phone number must have exactly 9 numbers");
             }
 
-            if (string.IsNullOrWhiteSpace(client.dni) || client.dni.Length != 8)
+            if (string.IsNullOrWhiteSpace(client.Dni) || client.Dni.Length != 8)
             {
                 throw new InvalidActionException("The DNI must have exactly 8 numbers");
             }
 
-            if (string.IsNullOrWhiteSpace(client.gender) || client.gender.Length != 1)
+            if (string.IsNullOrWhiteSpace(client.Gender) || client.Gender.Length != 1)
             {
                 throw new InvalidActionException("The gender must be exactly 1 character long");
             }
 
-            if(CalculateAge(client.birthdate) < 18)
+            if(CalculateAge(client.Birthdate) < 18)
             {
                 throw new InvalidActionException("The client must be at least 18 years old");
             }
@@ -74,22 +74,22 @@ namespace _2._Domain.Clients
         {
             await GetByIdAsync(id);
 
-            if (string.IsNullOrWhiteSpace(client.phone_number) || client.phone_number.Length != 9)
+            if (string.IsNullOrWhiteSpace(client.PhoneNumber) || client.PhoneNumber.Length != 9)
             {
                 throw new InvalidActionException("The phone number must have exactly 9 numbers");
             }
 
-            if (string.IsNullOrWhiteSpace(client.dni) || client.dni.Length != 8)
+            if (string.IsNullOrWhiteSpace(client.Dni) || client.Dni.Length != 8)
             {
                 throw new InvalidActionException("The DNI must have exactly 8 numbers");
             }
 
-            if (string.IsNullOrWhiteSpace(client.gender) || client.gender.Length != 1)
+            if (string.IsNullOrWhiteSpace(client.Gender) || client.Gender.Length != 1)
             {
                 throw new InvalidActionException("The gender must be exactly 1 character long");
             }
 
-            if (CalculateAge(client.birthdate) < 18)
+            if (CalculateAge(client.Birthdate) < 18)
             {
                 throw new InvalidActionException("The client must be at least 18 years old");
             }
@@ -119,7 +119,7 @@ namespace _2._Domain.Clients
         public async Task<bool> ActivatePremiumAsync(int id)
         {
             var clientExiste = await GetByIdAsync(id);
-            if(clientExiste != null && clientExiste.hasPremiun == true)
+            if(clientExiste != null && clientExiste.HasPremiun == true)
             {
                 throw new InvalidActionException("The client already has a premium plan");
             }

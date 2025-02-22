@@ -32,6 +32,9 @@ namespace _1._API.Mapper
 
             CreateMap<Message, MessageRequest>();
             CreateMap<Message, MessageReponse>();
+
+            CreateMap<Premiun, PremiunRequest>();
+            CreateMap<Premiun, PremiunResponse>();
         }
     }
 }

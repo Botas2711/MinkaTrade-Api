@@ -52,7 +52,7 @@ namespace _3._Data.Messages
             {
                 Message messageToUpdate = await GetByIdAsync(id);
 
-                messageToUpdate.content = message.content;
+                messageToUpdate.Content = message.Content;
                 messageToUpdate.SendById = message.SendById;
                 messageToUpdate.ChatId = message.ChatId;
 

@@ -5,17 +5,17 @@ namespace _1._API.Request
 {
     public class PostRequest
     {
-        [Required(ErrorMessage = "The title is required")]
+        [Required(ErrorMessage = "The Title is required")]
         [MaxLength(100)]
-        public string title { get; set; }
+        public string Title { get; set; }
 
-        [Required(ErrorMessage = "The price is required")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "The price must be greater than 0")]
-        public decimal price { get; set; }
+        [Required(ErrorMessage = "The Price is required")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "The Price must be greater than 0")]
+        public decimal Price { get; set; }
 
-        [Required(ErrorMessage = "The description is required")]
+        [Required(ErrorMessage = "The Description is required")]
         [MaxLength(200)]
-        public string description { get; set; }
+        public string Description { get; set; }
 
         [Required(ErrorMessage = "The categoryId is required")]
         [Range(1, int.MaxValue, ErrorMessage = "The categoryId must be greater than 0")]

@@ -7,7 +7,7 @@ namespace _1._API.Request
     {
         [Required(ErrorMessage = "The content is required")]
         [MaxLength(200)]
-        public string content { get; set; }
+        public string Content { get; set; }
 
         [Required(ErrorMessage = "The sendById is required")]
         [Range(1, int.MaxValue, ErrorMessage = "The sendById must be greater than 0")]

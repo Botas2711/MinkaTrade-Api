@@ -23,6 +23,8 @@ using _3._Data.Chats;
 using _2._Domain.Chats;
 using _3._Data.Messages;
 using _2._Domain.Messages;
+using _3._Data.Premiuns;
+using _2._Domain.Premiuns;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +55,9 @@ builder.Services.AddScoped<IChatDomain, ChatDomain>();
 
 builder.Services.AddScoped<IMessageData, MessageData>();
 builder.Services.AddScoped<IMessageDomain, MessageDomain>();
+
+builder.Services.AddScoped<IPremiunData, PremiunData>();
+builder.Services.AddScoped<IPremiunDomain, PremiunDomain>();
 
 // Cadena de conexion
 var ConnectionString = builder.Configuration.GetConnectionString("MinkaTradeBD");

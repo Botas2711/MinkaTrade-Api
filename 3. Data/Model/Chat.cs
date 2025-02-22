@@ -9,7 +9,7 @@ namespace _3._Data.Model
     public class Chat
     {
         public int Id { get; set; }
-        public DateTime created_date { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         // Cliente que inicia el chat
         public int ClientOneId { get; set; }

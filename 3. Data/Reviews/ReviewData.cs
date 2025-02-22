@@ -54,11 +54,11 @@ namespace _3._Data.Reviews
 
         public async Task<List<Review>> GetAllOrderByRateDescAsync(int clientId)
         {
-            return await _minkaTradeBD.Reviews.Where(p => p.ClientId == clientId).OrderByDescending(p => p.rate).ToListAsync();
+            return await _minkaTradeBD.Reviews.Where(p => p.ClientId == clientId).OrderByDescending(p => p.Rate).ToListAsync();
         }
         public async Task<List<Review>> GetAllOrderByRateAscAsync(int clientId)
         {
-            return await _minkaTradeBD.Reviews.Where(p => p.ClientId == clientId).OrderBy(p => p.rate).ToListAsync();
+            return await _minkaTradeBD.Reviews.Where(p => p.ClientId == clientId).OrderBy(p => p.Rate).ToListAsync();
         }
 
         public async Task<Review> GetByIdAsync(int id)
@@ -72,8 +72,8 @@ namespace _3._Data.Reviews
             {
                 Review reviewToUpdate = await GetByIdAsync(id);
 
-                reviewToUpdate.description = review.description;
-                reviewToUpdate.rate = review.rate;
+                reviewToUpdate.Description = review.Description;
+                reviewToUpdate.Rate = review.Rate;
 
                 _minkaTradeBD.Update(reviewToUpdate);
                 _minkaTradeBD.SaveChanges();

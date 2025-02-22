@@ -21,7 +21,7 @@ namespace _3._Data.Clients
             try
             {
                 Client clientToUpdate = await GetByIdAsync(id);
-                clientToUpdate.hasPremiun = true;
+                clientToUpdate.HasPremiun = true;
                 _minkaTradeBD.Update(clientToUpdate);
                 _minkaTradeBD.SaveChanges();
                 return true;
@@ -56,9 +56,9 @@ namespace _3._Data.Clients
             // Si accion es true significa que estamos actualizando
             if (accion)
             {
-                return await _minkaTradeBD.Clients.Where(p => p.dni == client.dni && p.Id != client.Id).FirstOrDefaultAsync();
+                return await _minkaTradeBD.Clients.Where(p => p.Dni == client.Dni && p.Id != client.Id).FirstOrDefaultAsync();
             }
-            return await _minkaTradeBD.Clients.Where(p => p.dni == client.dni).FirstOrDefaultAsync();
+            return await _minkaTradeBD.Clients.Where(p => p.Dni == client.Dni).FirstOrDefaultAsync();
         }
 
         public async Task<Client> GetByEmailAsync(Client client, bool accion)
@@ -66,9 +66,9 @@ namespace _3._Data.Clients
             // Si accion es true significa que estamos actualizando
             if (accion)
             {
-                return await _minkaTradeBD.Clients.Where(p => p.email == client.email && p.Id != client.Id).FirstOrDefaultAsync();
+                return await _minkaTradeBD.Clients.Where(p => p.Email == client.Email && p.Id != client.Id).FirstOrDefaultAsync();
             }
-            return await _minkaTradeBD.Clients.Where(p => p.email == client.email).FirstOrDefaultAsync();
+            return await _minkaTradeBD.Clients.Where(p => p.Email == client.Email).FirstOrDefaultAsync();
         }
 
         public async Task<Client> GetByIdAsync(int id)
@@ -80,9 +80,9 @@ namespace _3._Data.Clients
         {
             if (accion)
             {
-                return await _minkaTradeBD.Clients.Where(p => p.phone_number == client.phone_number && p.Id != client.Id).FirstOrDefaultAsync();
+                return await _minkaTradeBD.Clients.Where(p => p.PhoneNumber == client.PhoneNumber && p.Id != client.Id).FirstOrDefaultAsync();
             }
-            return await _minkaTradeBD.Clients.Where(p => p.phone_number == client.phone_number).FirstOrDefaultAsync();
+            return await _minkaTradeBD.Clients.Where(p => p.PhoneNumber == client.PhoneNumber).FirstOrDefaultAsync();
         }
 
 
@@ -92,14 +92,14 @@ namespace _3._Data.Clients
             {
                 Client clientToUpdate = await GetByIdAsync(id);
 
-                clientToUpdate.first_name = client.first_name;
-                clientToUpdate.last_name = client.last_name;
-                clientToUpdate.dni = client.dni;
-                clientToUpdate.birthdate = client.birthdate;
-                clientToUpdate.gender = client.gender;
-                clientToUpdate.email = client.email;
-                clientToUpdate.phone_number = client.phone_number;
-                clientToUpdate.profile_picture = client.profile_picture;
+                clientToUpdate.FirstName = client.FirstName;
+                clientToUpdate.LastName = client.LastName;
+                clientToUpdate.Dni = client.Dni;
+                clientToUpdate.Birthdate = client.Birthdate;
+                clientToUpdate.Gender = client.Gender;
+                clientToUpdate.Email = client.Email;
+                clientToUpdate.PhoneNumber = client.PhoneNumber;
+                clientToUpdate.ProfilePicture = client.ProfilePicture;
 
                 _minkaTradeBD.Update(clientToUpdate);
                 _minkaTradeBD.SaveChanges();

@@ -11,19 +11,20 @@ namespace _3._Data.Model
     public class Client
     {
         public int Id { get; set; }
-        public string first_name { get; set; }
-        public string last_name { get; set; }
-        public DateTime birthdate { get; set; }
-        public string dni { get; set; }
-        public string gender { get; set; }
-        public string email { get; set; }
-        public string phone_number { get; set; }
-        public byte[]? profile_picture { get; set; }
-        public bool hasPremiun { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime Birthdate { get; set; }
+        public string Dni { get; set; }
+        public string Gender { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public byte[]? ProfilePicture { get; set; }
+        public bool HasPremiun { get; set; }
 
         public List<Post> Posts { get; set; } = new List<Post>();
         public List<Review> Reviews { get; set; } = new List<Review>();
         public List<Chat> ChatsAsSender { get; set; } = new List<Chat>();
         public List<Chat> ChatsAsReceiver { get; set; } = new List<Chat>();
+        public List<Suscription> Suscriptions { get; set; } = new List<Suscription>();
     }
 }

@@ -22,6 +22,8 @@ namespace _1._API.Mapper
             CreateMap<ChatRequest, Chat>();
 
             CreateMap<MessageRequest, Message>();
+
+            CreateMap<PremiunRequest, Premiun>();
         }
 
         //Connvertir IformFile a byte[]

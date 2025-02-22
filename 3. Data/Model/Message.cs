@@ -9,8 +9,8 @@ namespace _3._Data.Model
     public class Message
     {
         public int Id { get; set; }
-        public string content { get; set; }
-        public DateTime created_date { get; set; }
+        public string Content { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         public int SendById { get; set; }
         public Client SendBy { get; set; }

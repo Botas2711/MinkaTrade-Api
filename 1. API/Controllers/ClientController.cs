@@ -79,15 +79,8 @@ namespace _1._API.Controllers
         [HttpPut("activePremiun/{id}")]
         public async Task<IActionResult> ActivePremiun(int id)
         {
-            if (id != null && id > 0)
-            {
-                var result = await _clientDomain.ActivatePremiumAsync(id);
-                return Ok(result);
-            }
-            else
-            {
-                return BadRequest();
-            }
+            var result = await _clientDomain.ActivatePremiumAsync(id);
+            return Ok(result);
         }
     }
 }

@@ -63,22 +63,22 @@ namespace _3._Data.Posts
 
         public async Task<List<Post>> GetAllByRangeDateAsync(DateTime initialDate, DateTime finalDate)
         {
-            return await _minkaTradeBD.Posts.Where(p => p.created_date >= initialDate && p.created_date <= finalDate).ToListAsync();
+            return await _minkaTradeBD.Posts.Where(p => p.CreatedDate >= initialDate && p.CreatedDate <= finalDate).ToListAsync();
         }
 
         public async Task<List<Post>> GetAllByRangePriceAsync(decimal initialPrice, decimal finalPrice)
         {
-            return await _minkaTradeBD.Posts.Where(p => p.price >= initialPrice && p.price <= finalPrice).ToListAsync();
+            return await _minkaTradeBD.Posts.Where(p => p.Price >= initialPrice && p.Price <= finalPrice).ToListAsync();
         }
 
         public async Task<List<Post>> GetAllByStatusAsync(bool status)
         {
-            return await _minkaTradeBD.Posts.Where(p => p.status == status).ToListAsync();
+            return await _minkaTradeBD.Posts.Where(p => p.Status == status).ToListAsync();
         }
 
         public async Task<List<Post>> GetAllByTitleAsync(string title)
         {
-            return await _minkaTradeBD.Posts.Where(p => p.title.Contains(title)).ToListAsync();
+            return await _minkaTradeBD.Posts.Where(p => p.Title.Contains(title)).ToListAsync();
         }
 
         public async Task<Post> GetByIdAsync(int id)
@@ -92,11 +92,11 @@ namespace _3._Data.Posts
             {
                 Post postToUpdate = await GetByIdAsync(id);
 
-                postToUpdate.title = post.title;
-                postToUpdate.description = post.description;
-                postToUpdate.price = post.price;
+                postToUpdate.Title = post.Title;
+                postToUpdate.Description = post.Description;
+                postToUpdate.Price = post.Price;
                 postToUpdate.CategoryId = post.CategoryId;
-                postToUpdate.updated_date = DateTime.Now;
+                postToUpdate.UpdatedDate = DateTime.Now;
 
                 _minkaTradeBD.Update(postToUpdate);
                 _minkaTradeBD.SaveChanges();

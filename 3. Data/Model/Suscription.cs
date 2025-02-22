@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 
 namespace _3._Data.Model
 {
-    public class Review
+    public class Suscription
     {
         public int Id { get; set; }
-        public string Description { get; set; }
-        public int Rate { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+
+        public int PremiunId { get; set; }
+        public Premiun Premiun { get; set; }
 
         public int ClientId { get; set; }
         public Client Client { get; set; }
-
-        public int SendById { get; set; }
-        public Client SendBy { get; set; }
     }
 }
