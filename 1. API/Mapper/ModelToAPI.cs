@@ -35,6 +35,9 @@ namespace _1._API.Mapper
 
             CreateMap<Premiun, PremiunRequest>();
             CreateMap<Premiun, PremiunResponse>();
+
+            CreateMap<Suscription, SuscriptionRequest>();
+            CreateMap<Suscription, SuscriptionResponse>();
         }
     }
 }

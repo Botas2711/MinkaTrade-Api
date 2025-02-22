@@ -46,6 +46,22 @@ namespace _3._Data.Clients
             }
         }
 
+        public async Task<bool> DesactivatePremiumAsync(int id)
+        {
+            try
+            {
+                Client clientToUpdate = await GetByIdAsync(id);
+                clientToUpdate.HasPremiun = false;
+                _minkaTradeBD.Update(clientToUpdate);
+                _minkaTradeBD.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public async Task<List<Client>> GetAllAsycnc()
         {
             return await _minkaTradeBD.Clients.ToListAsync();

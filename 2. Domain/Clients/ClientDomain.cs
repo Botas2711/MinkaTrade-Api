@@ -140,5 +140,15 @@ namespace _2._Domain.Clients
             }
             return clientExiste;
         }
+
+        public async Task<bool> DesactivatePremiumAsync(int id)
+        {
+            var clientExiste = await GetByIdAsync(id);
+            if(clientExiste != null && clientExiste.HasPremiun != true)
+            {
+                throw new InvalidActionException("The client does not have any premium plan");
+            }
+            return await _clientData.DesactivatePremiumAsync(id);
+        }
     }
 }

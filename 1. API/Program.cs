@@ -25,6 +25,8 @@ using _3._Data.Messages;
 using _2._Domain.Messages;
 using _3._Data.Premiuns;
 using _2._Domain.Premiuns;
+using _3._Data.Suscriptions;
+using _2._Domain.Suscriptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,6 +60,9 @@ builder.Services.AddScoped<IMessageDomain, MessageDomain>();
 
 builder.Services.AddScoped<IPremiunData, PremiunData>();
 builder.Services.AddScoped<IPremiunDomain, PremiunDomain>();
+
+builder.Services.AddScoped<ISuscriptionData, SuscriptionData>();
+builder.Services.AddScoped<ISuscriptionDomain, SuscriptionDomain>();
 
 // Cadena de conexion
 var ConnectionString = builder.Configuration.GetConnectionString("MinkaTradeBD");
