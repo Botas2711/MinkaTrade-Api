@@ -11,9 +11,11 @@ namespace _3._Data.Model
         public int Id { get; set; }
         public DateTime created_date { get; set; }
 
-        public int ClientId { get; set; }
-        public Client Client { get; set; }
+        // Cliente que inicia el chat
+        public int ClientOneId { get; set; }
+        public Client ClientOne { get; set; }
 
+        // Cliente que recibe el chat
         public int ClientTwoId { get; set; }
         public Client ClientTwo { get; set; }
 

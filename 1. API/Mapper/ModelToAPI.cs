@@ -29,6 +29,9 @@ namespace _1._API.Mapper
 
             CreateMap<Chat, ChatRequest>();
             CreateMap<Chat, ChatResponse>();
+
+            CreateMap<Message, MessageRequest>();
+            CreateMap<Message, MessageReponse>();
         }
     }
 }

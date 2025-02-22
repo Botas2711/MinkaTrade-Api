@@ -22,7 +22,7 @@ namespace _2._Domain.Chats
 
         public async Task<bool> CreateAsync(Chat chat)
         {
-            if(chat.ClientId <= 0)
+            if(chat.ClientOneId <= 0)
             {
                 throw new InvalidActionException("The clientId is invalid");
             }
@@ -30,7 +30,7 @@ namespace _2._Domain.Chats
             {
                 throw new InvalidActionException("The clientTwoId is invalid");
             }
-            await _clientDomain.GetByIdAsync(chat.ClientId);
+            await _clientDomain.GetByIdAsync(chat.ClientOneId);
             await _clientDomain.GetByIdAsync(chat.ClientTwoId);
             return await _chatData.CreateAsync(chat);
         }

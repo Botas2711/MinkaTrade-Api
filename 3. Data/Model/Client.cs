@@ -23,6 +23,7 @@ namespace _3._Data.Model
 
         public List<Post> Posts { get; set; } = new List<Post>();
         public List<Review> Reviews { get; set; } = new List<Review>();
-        public List<Chat> Chats { get; set; } = new List<Chat>();
+        public List<Chat> ChatsAsSender { get; set; } = new List<Chat>();
+        public List<Chat> ChatsAsReceiver { get; set; } = new List<Chat>();
     }
 }

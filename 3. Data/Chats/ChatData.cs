@@ -38,7 +38,7 @@ namespace _3._Data.Chats
 
         public async Task<List<Chat>> GetAllByClientIdAsync(int clientId)
         {
-            return await _minkaTradeBD.Chats.Where(p => p.ClientId == clientId).ToListAsync();
+            return await _minkaTradeBD.Chats.Where(c => c.ClientOneId == clientId || c.ClientTwoId == clientId).ToListAsync();
         }
 
         public async Task<Chat> GetByIdAsync(int id)

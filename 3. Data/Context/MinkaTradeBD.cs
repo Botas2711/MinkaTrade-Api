@@ -104,8 +104,11 @@ namespace _3._Data.Context
             builder.Entity<Chat>().Property(p => p.created_date).HasDefaultValue(DateTime.Now);
 
             //Relation
-            builder.Entity<Chat>().HasOne(c => c.ClientTwo).WithMany().HasForeignKey(c => c.ClientTwoId)
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Chat>().HasOne(c => c.ClientOne).WithMany(c => c.ChatsAsSender)
+                .HasForeignKey(c => c.ClientOneId).OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Chat>().HasOne(c => c.ClientTwo).WithMany(c => c.ChatsAsReceiver)
+                .HasForeignKey(c => c.ClientTwoId).OnDelete(DeleteBehavior.Restrict);
 
             //Message
             builder.Entity<Message>().ToTable("Messages");
@@ -117,6 +120,8 @@ namespace _3._Data.Context
             //Relation
             builder.Entity<Message>().HasOne(m => m.SendBy).WithMany().HasForeignKey(m => m.SendById)
                 .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Message>().HasOne(m => m.Chat).WithMany(c => c.Messages).HasForeignKey(m => m.ChatId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
