@@ -44,7 +44,7 @@ namespace _1._API.Controllers
 
         // POST api/<PostImageController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] PostImageRequest request)
+        public async Task<IActionResult> Post([FromForm] PostImageRequest request)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +60,7 @@ namespace _1._API.Controllers
 
         // PUT api/<PostImageController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] PostImageRequest request)
+        public async Task<IActionResult> Put(int id, [FromForm] PostImageRequest request)
         {
             if (ModelState.IsValid)
             {

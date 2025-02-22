@@ -11,10 +11,10 @@ namespace _2._Domain.Posts
     {
         public Task<Post> GetByIdAsync(int id);
         public Task<List<Post>> GetAllByClientIdAsync(int clientId);
-        public Task<List<Post>> GetAllByTitleIdAsync(string title);
-        public Task<List<Post>> GetAllByStatusIdAsync(bool status);
-        public Task<List<Post>> GetAllByRangePriceIdAsync(decimal initialPrice, decimal finalPrice);
-        public Task<List<Post>> GetAllByRangeDateIdAsync(DateTime initialDate, DateTime finalDate);
+        public Task<List<Post>> GetAllByTitleAsync(string title);
+        public Task<List<Post>> GetAllByStatusAsync(bool status);
+        public Task<List<Post>> GetAllByRangePriceAsync(decimal initialPrice, decimal finalPrice);
+        public Task<List<Post>> GetAllByRangeDateAsync(DateTime initialDate, DateTime finalDate);
         public Task<List<Post>> GetAllByCategoryIdAsync(int categoryId);
         public Task<bool> CreateAsync(Post post);
         public Task<bool> UpdateAsync(Post post, int id);

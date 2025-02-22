@@ -47,16 +47,16 @@ namespace _2._Domain.Posts
             return await _postData.GetAllByClientIdAsync(clientId);
         }
 
-        public async Task<List<Post>> GetAllByRangeDateIdAsync(DateTime initialDate, DateTime finalDate)
+        public async Task<List<Post>> GetAllByRangeDateAsync(DateTime initialDate, DateTime finalDate)
         {
             if (initialDate > finalDate)
             {
                 throw new InvalidActionException("The final date must be greater than the initial date");
             }
-            return await _postData.GetAllByRangeDateIdAsync(initialDate, finalDate);
+            return await _postData.GetAllByRangeDateAsync(initialDate, finalDate);
         }
 
-        public async Task<List<Post>> GetAllByRangePriceIdAsync(decimal initialPrice, decimal finalPrice)
+        public async Task<List<Post>> GetAllByRangePriceAsync(decimal initialPrice, decimal finalPrice)
         {
             if(initialPrice < 0)
             {
@@ -70,25 +70,25 @@ namespace _2._Domain.Posts
             {
                 throw new InvalidActionException("The final price must be higher than the initial price");
             }
-            return await _postData.GetAllByRangePriceIdAsync(initialPrice, finalPrice);
+            return await _postData.GetAllByRangePriceAsync(initialPrice, finalPrice);
         }
 
-        public async Task<List<Post>> GetAllByStatusIdAsync(bool status)
+        public async Task<List<Post>> GetAllByStatusAsync(bool status)
         {
             if (status == null)
             {
                 throw new InvalidActionException("The status is null");
             }
-            return await _postData.GetAllByStatusIdAsync(status);
+            return await _postData.GetAllByStatusAsync(status);
         }
 
-        public async Task<List<Post>> GetAllByTitleIdAsync(string title)
+        public async Task<List<Post>> GetAllByTitleAsync(string title)
         {
             if (string.IsNullOrWhiteSpace(title))
             {
                 throw new InvalidActionException("The title is empty");
             }
-            return await _postData.GetAllByTitleIdAsync(title);
+            return await _postData.GetAllByTitleAsync(title);
         }
 
         public async Task<Post> GetByIdAsync(int id)

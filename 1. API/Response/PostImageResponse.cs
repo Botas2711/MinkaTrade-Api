@@ -3,6 +3,6 @@
     public class PostImageResponse
     {
         public int Id { get; set; }
-        public byte[] Images { get; set; }
+        public string Images { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace _1._API.Request
         public string title { get; set; }
 
         [Required(ErrorMessage = "The price is required")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "The price must be greater than zero")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "The price must be greater than 0")]
         public decimal price { get; set; }
 
         [Required(ErrorMessage = "The description is required")]

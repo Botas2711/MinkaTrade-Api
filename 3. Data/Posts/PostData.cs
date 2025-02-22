@@ -56,27 +56,27 @@ namespace _3._Data.Posts
             return await _minkaTradeBD.Posts.Where(p => p.CategoryId == categoryId).ToListAsync();
         }
 
-        public async Task<List<Post>> GetAllByClientIdAsync(int postId)
+        public async Task<List<Post>> GetAllByClientIdAsync(int clientId)
         {
-            return await _minkaTradeBD.Posts.Where(p => p.ClientId == postId).ToListAsync();
+            return await _minkaTradeBD.Posts.Where(p => p.ClientId == clientId).ToListAsync();
         }
 
-        public async Task<List<Post>> GetAllByRangeDateIdAsync(DateTime initialDate, DateTime finalDate)
+        public async Task<List<Post>> GetAllByRangeDateAsync(DateTime initialDate, DateTime finalDate)
         {
             return await _minkaTradeBD.Posts.Where(p => p.created_date >= initialDate && p.created_date <= finalDate).ToListAsync();
         }
 
-        public async Task<List<Post>> GetAllByRangePriceIdAsync(decimal initialPrice, decimal finalPrice)
+        public async Task<List<Post>> GetAllByRangePriceAsync(decimal initialPrice, decimal finalPrice)
         {
             return await _minkaTradeBD.Posts.Where(p => p.price >= initialPrice && p.price <= finalPrice).ToListAsync();
         }
 
-        public async Task<List<Post>> GetAllByStatusIdAsync(bool status)
+        public async Task<List<Post>> GetAllByStatusAsync(bool status)
         {
             return await _minkaTradeBD.Posts.Where(p => p.status == status).ToListAsync();
         }
 
-        public async Task<List<Post>> GetAllByTitleIdAsync(string title)
+        public async Task<List<Post>> GetAllByTitleAsync(string title)
         {
             return await _minkaTradeBD.Posts.Where(p => p.title.Contains(title)).ToListAsync();
         }

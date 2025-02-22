@@ -18,10 +18,14 @@ namespace _1._API.Mapper
             CreateMap<Category, CategoryResponse>();
 
             CreateMap<PostImage, PostImageRequest>();
-            CreateMap<PostImage, PostImageResponse>();
+            CreateMap<PostImage, PostImageResponse>()
+            .ForMember(dest => dest.Images, opt => opt.MapFrom(src => Convert.ToBase64String(src.Images)));
 
             CreateMap<Post, PostRequest>();
             CreateMap<Post, PostResponse>();
+
+            CreateMap<Review, ReviewRequest>();
+            CreateMap<Review, ReviewResponse>();
         }
     }
 }

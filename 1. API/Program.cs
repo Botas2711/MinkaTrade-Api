@@ -17,6 +17,8 @@ using _3._Data.PostImages;
 using _2._Domain.PostImages;
 using _3._Data.Posts;
 using _2._Domain.Posts;
+using _3._Data.Reviews;
+using _2._Domain.Reviews;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +40,9 @@ builder.Services.AddScoped<IPostImageDomain, PostImageDomain>();
 
 builder.Services.AddScoped<IPostData, PostData>();
 builder.Services.AddScoped<IPostDomain, PostDomain>();
+
+builder.Services.AddScoped<IReviewData, ReviewData>();
+builder.Services.AddScoped<IReviewDomain, ReviewDomain>();
 
 // Cadena de conexion
 var ConnectionString = builder.Configuration.GetConnectionString("MinkaTradeBD");

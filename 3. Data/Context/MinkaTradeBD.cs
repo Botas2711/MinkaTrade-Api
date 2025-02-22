@@ -16,6 +16,9 @@ namespace _3._Data.Context
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostImage> PostImages { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Chat> Chats { get; set; }
+        public DbSet<Message> Messages { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -80,6 +83,40 @@ namespace _3._Data.Context
             //Relation
             builder.Entity<PostImage>().HasOne(pi => pi.Post).WithMany(p => p.PostImages)
                 .HasForeignKey(pi => pi.PostId).OnDelete(DeleteBehavior.Cascade);
+
+
+            //Review
+            builder.Entity<Review>().ToTable("Reviews");
+            builder.Entity<Review>().HasKey(p => p.Id);
+            builder.Entity<Review>().Property(p => p.Id).ValueGeneratedOnAdd();
+            builder.Entity<Review>().Property(p => p.description).IsRequired().HasMaxLength(200);
+            builder.Entity<Review>().Property(p => p.rate).IsRequired();
+            builder.Entity<Review>().Property(p => p.created_date).HasDefaultValue(DateTime.Now);
+
+            //Relation
+            builder.Entity<Review>().HasOne(m => m.SendBy).WithMany().HasForeignKey(m => m.SendById)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            //Chat
+            builder.Entity<Chat>().ToTable("Chats");
+            builder.Entity<Chat>().HasKey(p => p.Id);
+            builder.Entity<Chat>().Property(p => p.Id).ValueGeneratedOnAdd();
+            builder.Entity<Chat>().Property(p => p.created_date).HasDefaultValue(DateTime.Now);
+
+            //Relation
+            builder.Entity<Chat>().HasOne(c => c.ClientTwo).WithMany().HasForeignKey(c => c.ClientTwoId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            //Message
+            builder.Entity<Message>().ToTable("Messages");
+            builder.Entity<Message>().HasKey(p => p.Id);
+            builder.Entity<Message>().Property(p => p.Id).ValueGeneratedOnAdd();
+            builder.Entity<Message>().Property(p => p.content).IsRequired().HasMaxLength(200);
+            builder.Entity<Message>().Property(p => p.created_date).HasDefaultValue(DateTime.Now);
+
+            //Relation
+            builder.Entity<Message>().HasOne(m => m.SendBy).WithMany().HasForeignKey(m => m.SendById)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

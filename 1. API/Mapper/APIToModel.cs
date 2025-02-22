@@ -12,9 +12,21 @@ namespace _1._API.Mapper
 
             CreateMap<CategoryRequest, Category>();
 
-            CreateMap<PostImageRequest, PostImage>();
+            CreateMap<PostImageRequest, PostImage>()
+            .ForMember(dest => dest.Images, opt => opt.MapFrom(src => ConvertToByteArray(src.Images)));
 
             CreateMap<PostRequest, Post>();
+
+            CreateMap<ReviewRequest, Review>();
+        }
+
+        //Connvertir IformFile a byte[]
+        private static byte[] ConvertToByteArray(IFormFile file)
+        {
+            if (file == null) return null;
+            using var memoryStream = new MemoryStream();
+            file.CopyTo(memoryStream);
+            return memoryStream.ToArray();
         }
     }
 }

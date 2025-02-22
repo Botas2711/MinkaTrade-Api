@@ -47,7 +47,7 @@ namespace _1._API.Controllers
         [HttpGet("title/{title}")]
         public async Task<List<PostResponse>> GetAllByTitle(string title)
         {
-            var posts = await _postDomain.GetAllByTitleIdAsync(title);
+            var posts = await _postDomain.GetAllByTitleAsync(title);
             var response = _mapper.Map<List<Post>, List<PostResponse>>(posts);
             return response;
         }
@@ -56,7 +56,7 @@ namespace _1._API.Controllers
         [HttpGet("status/{status}")]
         public async Task<List<PostResponse>> GetAllByStatus(bool status)
         {
-            var posts = await _postDomain.GetAllByStatusIdAsync(status);
+            var posts = await _postDomain.GetAllByStatusAsync(status);
             var response = _mapper.Map<List<Post>, List<PostResponse>>(posts);
             return response;
         }
@@ -74,7 +74,7 @@ namespace _1._API.Controllers
         [HttpGet("rangePrice/initial/{initalPrice}/final/{finalPrice}")]
         public async Task<List<PostResponse>> GetAllByRangePrice(decimal initalPrice, decimal finalPrice)
         {
-            var posts = await _postDomain.GetAllByRangePriceIdAsync(initalPrice, finalPrice);
+            var posts = await _postDomain.GetAllByRangePriceAsync(initalPrice, finalPrice);
             var response = _mapper.Map<List<Post>, List<PostResponse>>(posts);
             return response;
         }
@@ -83,7 +83,7 @@ namespace _1._API.Controllers
         [HttpGet("rangeDate/initial/{initialDate}/final/{finalDate}")]
         public async Task<List<PostResponse>> GetAllByRangeDate(DateTime initialDate, DateTime finalDate)
         {
-            var posts = await _postDomain.GetAllByRangeDateIdAsync(initialDate, finalDate);
+            var posts = await _postDomain.GetAllByRangeDateAsync(initialDate, finalDate);
             var response = _mapper.Map<List<Post>, List<PostResponse>>(posts);
             return response;
         }
