@@ -62,7 +62,7 @@ namespace _1._API.Controllers
 
         // POST api/<ReviewController>
         [HttpPost]
-        public async Task<IActionResult> Review([FromBody] ReviewRequest request)
+        public async Task<IActionResult> Post([FromBody] ReviewRequest request)
         {
             if (ModelState.IsValid)
             {

@@ -18,6 +18,8 @@ namespace _1._API.Mapper
             CreateMap<PostRequest, Post>();
 
             CreateMap<ReviewRequest, Review>();
+
+            CreateMap<ChatRequest, Chat>();
         }
 
         //Connvertir IformFile a byte[]

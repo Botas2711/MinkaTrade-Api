@@ -19,6 +19,8 @@ using _3._Data.Posts;
 using _2._Domain.Posts;
 using _3._Data.Reviews;
 using _2._Domain.Reviews;
+using _3._Data.Chats;
+using _2._Domain.Chats;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +45,9 @@ builder.Services.AddScoped<IPostDomain, PostDomain>();
 
 builder.Services.AddScoped<IReviewData, ReviewData>();
 builder.Services.AddScoped<IReviewDomain, ReviewDomain>();
+
+builder.Services.AddScoped<IChatData, ChatData>();
+builder.Services.AddScoped<IChatDomain, ChatDomain>();
 
 // Cadena de conexion
 var ConnectionString = builder.Configuration.GetConnectionString("MinkaTradeBD");

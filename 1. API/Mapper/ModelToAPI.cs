@@ -26,6 +26,9 @@ namespace _1._API.Mapper
 
             CreateMap<Review, ReviewRequest>();
             CreateMap<Review, ReviewResponse>();
+
+            CreateMap<Chat, ChatRequest>();
+            CreateMap<Chat, ChatResponse>();
         }
     }
 }
