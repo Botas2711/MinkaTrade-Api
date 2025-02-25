@@ -25,7 +25,11 @@ namespace _1._API.Controllers
         }
 
         // GET: api/<PostController>
+        /// <summary>
+        /// Get all Posts without filters
+        /// </summary>
         [HttpGet]
+        [Produces("application/json")]
         public async Task<List<PostResponse>> GetAll()
         {
             var posts = await _postData.GetAllAsycnc();
@@ -35,7 +39,11 @@ namespace _1._API.Controllers
 
 
         // GET: api/<PostController>/client/5
+        /// <summary>
+        /// Get all posts from a client
+        /// </summary>
         [HttpGet("client/{clientId}")]
+        [Produces("application/json")]
         public async Task<List<PostResponse>> GetAllByClientId(int clientId)
         {
             var posts = await _postDomain.GetAllByClientIdAsync(clientId);
@@ -44,7 +52,11 @@ namespace _1._API.Controllers
         }
 
         // GET: api/<PostController>/title/5
+        /// <summary>
+        /// Get all posts with a filter title
+        /// </summary>
         [HttpGet("title/{title}")]
+        [Produces("application/json")]
         public async Task<List<PostResponse>> GetAllByTitle(string title)
         {
             var posts = await _postDomain.GetAllByTitleAsync(title);
@@ -53,7 +65,11 @@ namespace _1._API.Controllers
         }
 
         // GET: api/<PostController>/status/5
+        /// <summary>
+        /// Get all posts with a filter status
+        /// </summary>
         [HttpGet("status/{status}")]
+        [Produces("application/json")]
         public async Task<List<PostResponse>> GetAllByStatus(bool status)
         {
             var posts = await _postDomain.GetAllByStatusAsync(status);
@@ -62,7 +78,11 @@ namespace _1._API.Controllers
         }
 
         // GET: api/<PostController>/category/5
+        /// <summary>
+        /// Get all posts with a filter category
+        /// </summary>
         [HttpGet("category/{categoryId}")]
+        [Produces("application/json")]
         public async Task<List<PostResponse>> GetAllByCategory(int categoryId)
         {
             var posts = await _postDomain.GetAllByCategoryIdAsync(categoryId);
@@ -71,7 +91,11 @@ namespace _1._API.Controllers
         }
 
         // GET: api/<PostController>/rangePrice/initial/5/final/5
+        /// <summary>
+        /// Get all posts with in a price range
+        /// </summary>
         [HttpGet("rangePrice/initial/{initalPrice}/final/{finalPrice}")]
+        [Produces("application/json")]
         public async Task<List<PostResponse>> GetAllByRangePrice(decimal initalPrice, decimal finalPrice)
         {
             var posts = await _postDomain.GetAllByRangePriceAsync(initalPrice, finalPrice);
@@ -80,7 +104,11 @@ namespace _1._API.Controllers
         }
 
         // GET: api/<PostController>/rangeDate/initial/5/final/5
+        /// <summary>
+        /// Get all posts with in a date range
+        /// </summary>
         [HttpGet("rangeDate/initial/{initialDate}/final/{finalDate}")]
+        [Produces("application/json")]
         public async Task<List<PostResponse>> GetAllByRangeDate(DateTime initialDate, DateTime finalDate)
         {
             var posts = await _postDomain.GetAllByRangeDateAsync(initialDate, finalDate);
@@ -89,7 +117,11 @@ namespace _1._API.Controllers
         }
 
         // GET api/<PostController>/5
+        /// <summary>
+        /// Get one post with a filter of its id
+        /// </summary>
         [HttpGet("{id}")]
+        [Produces("application/json")]
         public async Task<PostResponse> Get(int id)
         {
             var post = await _postDomain.GetByIdAsync(id);
@@ -98,6 +130,9 @@ namespace _1._API.Controllers
         }
 
         // POST api/<PostController>
+        /// <summary>
+        /// Register a post
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PostRequest request)
         {
@@ -114,6 +149,9 @@ namespace _1._API.Controllers
         }
 
         // PUT api/<PostController>/5
+        /// <summary>
+        /// Update a post
+        /// </summary>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] PostRequest request)
         {
@@ -130,6 +168,9 @@ namespace _1._API.Controllers
         }
 
         // DELETE api/<PostController>/5
+        /// <summary>
+        /// Delete a post
+        /// </summary>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

@@ -26,7 +26,11 @@ namespace _1._API.Controllers
         }
 
         // GET: api/<ClientController>
+        /// <summary>
+        /// Get all clients without filters
+        /// </summary>
         [HttpGet]
+        [Produces("application/json")]
         public async Task<List<ClientResponse>> GetAsync()
         {
             var clients = await _clientData.GetAllAsycnc();
@@ -35,7 +39,11 @@ namespace _1._API.Controllers
         }
 
         // GET api/<ClientController>/5
+        /// <summary>
+        /// Get a client with a filter of its id
+        /// </summary>
         [HttpGet("{id}")]
+        [Produces("application/json")]
         public async Task<ClientResponse> Get(int id)
         {
             var client = await _clientDomain.GetByIdAsync(id);
@@ -44,6 +52,9 @@ namespace _1._API.Controllers
         }
 
         // POST api/<ClientController>
+        /// <summary>
+        /// Register one client 
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ClientRequest request)
         {
@@ -60,6 +71,9 @@ namespace _1._API.Controllers
         }
 
         // PUT api/<ClientController>/5
+        /// <summary>
+        /// Update a client information 
+        /// </summary>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] ClientRequest request)
         {

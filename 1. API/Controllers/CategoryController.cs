@@ -26,7 +26,11 @@ namespace _1._API.Controllers
         }
 
         // GET: api/<CategoryController>
+        /// <summary>
+        /// Get all categories without filters
+        /// </summary>
         [HttpGet]
+        [Produces("application/json")]
         public async Task<List<CategoryResponse>> GetAll()
         {
             var categories = await _categoryData.GetAllAsycnc();
@@ -35,7 +39,11 @@ namespace _1._API.Controllers
         }
 
         // GET api/<CategoryController>/5
+        /// <summary>
+        /// Get one category with a filter of its id
+        /// </summary>
         [HttpGet("{id}")]
+        [Produces("application/json")]
         public async Task<CategoryResponse> Get(int id)
         {
             var category = await _categoryDomain.GetByIdAsync(id);
@@ -44,6 +52,9 @@ namespace _1._API.Controllers
         }
 
         // POST api/<CategoryController>
+        /// <summary>
+        /// Register a category
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CategoryRequest request)
         {
@@ -60,6 +71,9 @@ namespace _1._API.Controllers
         }
 
         // PUT api/<CategoryController>/5
+        /// <summary>
+        /// Update a category
+        /// </summary>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] CategoryRequest request)
         {

@@ -25,7 +25,11 @@ namespace _1._API.Controllers
         }
 
         // GET: api/<PostImageController>/post/5
+        /// <summary>
+        /// Get all post images from a post
+        /// </summary>
         [HttpGet("post/{posId}")]
+        [Produces("application/json")]
         public async Task<List<PostImageResponse>> GetAll(int posId)
         {
             var postImages = await _postImageDomain.GetAllByPostIdAsync(posId);
@@ -34,7 +38,11 @@ namespace _1._API.Controllers
         }
 
         // GET api/<PostImageController>/5
+        /// <summary>
+        /// Get one post image with a filter of its id
+        /// </summary>
         [HttpGet("{id}")]
+        [Produces("application/json")]
         public async Task<PostImageResponse> Get(int id)
         {
             var postImage = await _postImageDomain.GetByIdAsync(id);
@@ -43,6 +51,9 @@ namespace _1._API.Controllers
         }
 
         // POST api/<PostImageController>
+        /// <summary>
+        /// Register a post image
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] PostImageRequest request)
         {
@@ -59,6 +70,9 @@ namespace _1._API.Controllers
         }
 
         // PUT api/<PostImageController>/5
+        /// <summary>
+        /// Update a post image
+        /// </summary>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromForm] PostImageRequest request)
         {
@@ -75,6 +89,9 @@ namespace _1._API.Controllers
         }
 
         // DELETE api/<PostImageController>/5
+        /// <summary>
+        /// Delete a post image
+        /// </summary>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

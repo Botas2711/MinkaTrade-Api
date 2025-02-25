@@ -25,7 +25,11 @@ namespace _1._API.Controllers
         }
 
         // GET: api/<MessageController>
+        /// <summary>
+        /// Get all messages without filters
+        /// </summary>
         [HttpGet]
+        [Produces("application/json")]
         public async Task<List<MessageReponse>> GetAll()
         {
             var messages = await _messageData.GetAllAsycnc();
@@ -34,7 +38,11 @@ namespace _1._API.Controllers
         }
 
         // GET api/<MessageController>/5
+        /// <summary>
+        /// Get a message with a filter of its id
+        /// </summary>
         [HttpGet("{id}")]
+        [Produces("application/json")]
         public async Task<MessageReponse> Get(int id)
         {
             var message = await _messageDomain.GetByIdAsync(id);
@@ -43,7 +51,11 @@ namespace _1._API.Controllers
         }
 
         // GET api/<MessageController>/chat/5
+        /// <summary>
+        /// Get all messages from a chat
+        /// </summary>
         [HttpGet("chat/{chatId}")]
+        [Produces("application/json")]
         public async Task<List<MessageReponse>> GetAllByChat(int chatId)
         {
             var messages = await _messageDomain.GetAllByChatIdAsync(chatId);
@@ -52,6 +64,9 @@ namespace _1._API.Controllers
         }
 
         // POST api/<MessageController>
+        /// <summary>
+        /// Register a message
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] MessageRequest request)
         {
@@ -68,6 +83,9 @@ namespace _1._API.Controllers
         }
 
         // PUT api/<MessageController>/5
+        /// <summary>
+        /// Update a message
+        /// </summary>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] MessageRequest request)
         {

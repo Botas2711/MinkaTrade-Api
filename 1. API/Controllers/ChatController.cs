@@ -25,7 +25,11 @@ namespace _1._API.Controllers
         }
 
         // GET: api/<ChatController>
+        /// <summary>
+        /// Get all chats without filters
+        /// </summary>
         [HttpGet]
+        [Produces("application/json")]
         public async Task<List<ChatResponse>> GetAll()
         {
             var chats = await _chatData.GetAllAsycnc();
@@ -34,7 +38,11 @@ namespace _1._API.Controllers
         }
 
         // GET: api/<ReviewController>/client/5
+        /// <summary>
+        /// Get all chats from a client
+        /// </summary>
         [HttpGet("client/{clientId}")]
+        [Produces("application/json")]
         public async Task<List<ChatResponse>> GetAllByClientId(int clientId)
         {
             var chats = await _chatDomain.GetAllByClientIdAsync(clientId);
@@ -43,7 +51,11 @@ namespace _1._API.Controllers
         }
 
         // GET api/<ChatController>/5
+        /// <summary>
+        /// Get a chat with a filter of its id
+        /// </summary>
         [HttpGet("{id}")]
+        [Produces("application/json")]
         public async Task<ChatResponse> Get(int id)
         {
             var chat = await _chatDomain.GetByIdAsync(id);
@@ -52,6 +64,9 @@ namespace _1._API.Controllers
         }
 
         // POST api/<ChatController>
+        /// <summary>
+        /// Register a chat
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ChatRequest request)
         {

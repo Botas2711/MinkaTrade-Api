@@ -27,7 +27,11 @@ namespace _1._API.Controllers
         }
 
         // GET: api/<SuscriptionController>
+        /// <summary>
+        /// Get al suscriptions from a client
+        /// </summary>
         [HttpGet("client/{clientId}")]
+        [Produces("application/json")]
         public async Task<List<SuscriptionResponse>> GetAllByClientId(int clientId)
         {
             var suscriptions = await _suscriptionDomain.GetAllByClientIdAsync(clientId);
@@ -36,7 +40,11 @@ namespace _1._API.Controllers
         }
 
         // GET api/<SuscriptionController>/5
+        /// <summary>
+        /// Get a suscription with a filter of its id
+        /// </summary>
         [HttpGet("{id}")]
+        [Produces("application/json")]
         public async Task<SuscriptionResponse> Get(int id)
         {
             var suscription = await _suscriptionDomain.GetByIdAsync(id);
@@ -45,6 +53,9 @@ namespace _1._API.Controllers
         }
 
         // POST api/<SuscriptionController>
+        /// <summary>
+        /// Resgiter a suscription of a client
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] SuscriptionRequest request)
         {

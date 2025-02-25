@@ -25,7 +25,11 @@ namespace _1._API.Controllers
         }
 
         // GET api/<ReviewController>/5
+        /// <summary>
+        /// Get a review with a filter of its id
+        /// </summary>
         [HttpGet("{id}")]
+        [Produces("application/json")]
         public async Task<ReviewResponse> Get(int id)
         {
             var review = await _reviewDomain.GetByIdAsync(id);
@@ -34,7 +38,11 @@ namespace _1._API.Controllers
         }
 
         // GET: api/<ReviewController>/client/5
+        /// <summary>
+        /// Get all reviews from a client
+        /// </summary>
         [HttpGet("client/{clientId}")]
+        [Produces("application/json")]
         public async Task<List<ReviewResponse>> GetByClientId(int clientId)
         {
             var reviews = await _reviewDomain.GetAllByClientIdAsync(clientId);
@@ -43,7 +51,11 @@ namespace _1._API.Controllers
         }
 
         // GET: api/<ReviewController>/orderDesc/5
+        /// <summary>
+        /// Get all reviews of a client sorted descendingly
+        /// </summary>
         [HttpGet("orderDesc/{clientId}")]
+        [Produces("application/json")]
         public async Task<List<ReviewResponse>> GetAllOrderByRateDesc(int clientId)
         {
             var reviews = await _reviewDomain.GetAllOrderByRateDescAsync(clientId);
@@ -52,7 +64,11 @@ namespace _1._API.Controllers
         }
 
         // GET: api/<ReviewController>/orderAsc/5
+        /// <summary>
+        /// Get all reviews of a client sorted ascendingly
+        /// </summary>
         [HttpGet("orderAsc/{clientId}")]
+        [Produces("application/json")]
         public async Task<List<ReviewResponse>> GetAllOrderByRateAsc(int clientId)
         {
             var reviews = await _reviewDomain.GetAllOrderByRateAscAsync(clientId);
@@ -61,6 +77,9 @@ namespace _1._API.Controllers
         }
 
         // POST api/<ReviewController>
+        /// <summary>
+        /// Register a review
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ReviewRequest request)
         {
@@ -77,6 +96,9 @@ namespace _1._API.Controllers
         }
 
         // PUT api/<ReviewController>/5
+        /// <summary>
+        /// Update a review
+        /// </summary>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] ReviewRequest request)
         {
@@ -93,6 +115,9 @@ namespace _1._API.Controllers
         }
 
         // DELETE api/<ReviewController>/5
+        /// <summary>
+        /// Delete a review
+        /// </summary>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

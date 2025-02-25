@@ -25,7 +25,11 @@ namespace _1._API.Controllers
         }
 
         // GET api/<PremiunController>/5
+        /// <summary>
+        /// Get a premiun with a filter of its id
+        /// </summary>
         [HttpGet("{id}")]
+        [Produces("application/json")]
         public async Task<PremiunResponse> Get(int id)
         {
             var premiun = await _premiunDomain.GetByIdAsync(id);
@@ -34,6 +38,9 @@ namespace _1._API.Controllers
         }
 
         // POST api/<PremiunController>
+        /// <summary>
+        /// Register a premiun
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PremiunRequest request)
         {
@@ -50,6 +57,9 @@ namespace _1._API.Controllers
         }
 
         // PUT api/<PremiunController>/5
+        /// <summary>
+        /// Update a premiun
+        /// </summary>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] PremiunRequest request)
         {
