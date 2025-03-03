@@ -38,6 +38,8 @@ namespace _1._API.Mapper
 
             CreateMap<Suscription, SuscriptionRequest>();
             CreateMap<Suscription, SuscriptionResponse>();
+
+            CreateMap<User, UserResponse>();
         }
     }
 }

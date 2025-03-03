@@ -29,8 +29,26 @@ using _3._Data.Suscriptions;
 using _2._Domain.Suscriptions;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using _3._Data.Users;
+using _2._Domain.Users;
+using _2._Domain.Token;
+using _1._API.Token;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.AllowAnyOrigin()
+                                .AllowAnyMethod()
+                                .AllowAnyHeader();
+                      });
+});
 
 // Add services to the container.
 
@@ -89,6 +107,19 @@ builder.Services.AddScoped<IPremiunDomain, PremiunDomain>();
 builder.Services.AddScoped<ISuscriptionData, SuscriptionData>();
 builder.Services.AddScoped<ISuscriptionDomain, SuscriptionDomain>();
 
+builder.Services.AddScoped<IUserData, UserData>();
+builder.Services.AddScoped<IUserDomain, UserDomain>();
+
+builder.Services.AddScoped<ITokenService, TokenService>();
+
+//jwt
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+});
+
 // Cadena de conexion
 var ConnectionString = builder.Configuration.GetConnectionString("MinkaTradeBD");
 builder.Services.AddDbContext<MinkaTradeBD>(
@@ -112,6 +143,9 @@ builder.Services.AddAutoMapper(
 
 var app = builder.Build();
 
+//CORS
+app.UseCors(MyAllowSpecificOrigins);
+
 // Validar que la base de datos no existe
 using (var scope = app.Services.CreateScope())
 using (var context = scope.ServiceProvider.GetService<MinkaTradeBD>())
@@ -128,6 +162,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<JwtMiddleware>();
 
 app.UseHttpsRedirection();
 

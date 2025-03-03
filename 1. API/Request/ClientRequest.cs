@@ -29,5 +29,9 @@ namespace _1._API.Request
 
         [Required(ErrorMessage = "The PhoneNumber is required")]
         public string PhoneNumber { get; set; }
+
+        [Required(ErrorMessage = "The UserId is required")]
+        [Range(1, int.MaxValue, ErrorMessage = "The UserId must be greater than 0")]
+        public int UserId { get; set; }
     }
 }

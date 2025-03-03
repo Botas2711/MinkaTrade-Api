@@ -1,4 +1,5 @@
-﻿using _1._API.Request;
+﻿using _1._API.Filter;
+using _1._API.Request;
 using _1._API.Response;
 using _2._Domain.Reviews;
 using _2._Domain.Suscriptions;
@@ -32,6 +33,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("client/{clientId}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<List<SuscriptionResponse>> GetAllByClientId(int clientId)
         {
             var suscriptions = await _suscriptionDomain.GetAllByClientIdAsync(clientId);
@@ -45,6 +47,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("{id}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<SuscriptionResponse> Get(int id)
         {
             var suscription = await _suscriptionDomain.GetByIdAsync(id);
@@ -57,6 +60,7 @@ namespace _1._API.Controllers
         /// Resgiter a suscription of a client
         /// </summary>
         [HttpPost]
+        [Authorize("admin,user")]
         public async Task<IActionResult> Post([FromBody] SuscriptionRequest request)
         {
             if (ModelState.IsValid)

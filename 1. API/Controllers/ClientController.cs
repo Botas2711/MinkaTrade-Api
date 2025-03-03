@@ -1,4 +1,5 @@
-﻿using _1._API.Request;
+﻿using _1._API.Filter;
+using _1._API.Request;
 using _1._API.Response;
 using _2._Domain.Clients;
 using _3._Data.Clients;
@@ -31,6 +32,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet]
         [Produces("application/json")]
+        [Authorize("admin")]
         public async Task<List<ClientResponse>> GetAsync()
         {
             var clients = await _clientData.GetAllAsycnc();
@@ -44,6 +46,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("{id}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<ClientResponse> Get(int id)
         {
             var client = await _clientDomain.GetByIdAsync(id);
@@ -75,6 +78,7 @@ namespace _1._API.Controllers
         /// Update a client information 
         /// </summary>
         [HttpPut("{id}")]
+        [Authorize("user")]
         public async Task<IActionResult> Put(int id, [FromBody] ClientRequest request)
         {
             if (ModelState.IsValid)
@@ -91,6 +95,7 @@ namespace _1._API.Controllers
 
         // PUT api/<ClientController>/activePremiun/5
         [HttpPut("activePremiun/{id}")]
+        [Authorize("admin")]
         public async Task<IActionResult> ActivePremiun(int id)
         {
             var result = await _clientDomain.ActivatePremiumAsync(id);

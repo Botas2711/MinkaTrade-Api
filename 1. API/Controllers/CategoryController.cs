@@ -1,4 +1,5 @@
-﻿using _1._API.Request;
+﻿using _1._API.Filter;
+using _1._API.Request;
 using _1._API.Response;
 using _2._Domain.Categories;
 using _3._Data.Categories;
@@ -31,6 +32,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<List<CategoryResponse>> GetAll()
         {
             var categories = await _categoryData.GetAllAsycnc();
@@ -44,6 +46,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("{id}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<CategoryResponse> Get(int id)
         {
             var category = await _categoryDomain.GetByIdAsync(id);
@@ -56,6 +59,7 @@ namespace _1._API.Controllers
         /// Register a category
         /// </summary>
         [HttpPost]
+        [Authorize("admin")]
         public async Task<IActionResult> Post([FromBody] CategoryRequest request)
         {
             if (ModelState.IsValid)
@@ -75,6 +79,7 @@ namespace _1._API.Controllers
         /// Update a category
         /// </summary>
         [HttpPut("{id}")]
+        [Authorize("admin")]
         public async Task<IActionResult> Put(int id, [FromBody] CategoryRequest request)
         {
             if (ModelState.IsValid)

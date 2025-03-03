@@ -26,5 +26,7 @@ namespace _3._Data.Model
         public List<Chat> ChatsAsSender { get; set; } = new List<Chat>();
         public List<Chat> ChatsAsReceiver { get; set; } = new List<Chat>();
         public List<Suscription> Suscriptions { get; set; } = new List<Suscription>();
+        public User User { get; set; }
+        public int UserId { get; set; }
     }
 }

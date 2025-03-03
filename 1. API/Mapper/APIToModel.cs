@@ -26,6 +26,9 @@ namespace _1._API.Mapper
             CreateMap<PremiunRequest, Premiun>();
 
             CreateMap<SuscriptionRequest, Suscription>();
+
+            CreateMap<UserCreateRequest, User>();
+            CreateMap<UserLoginRequest, User>();
         }
 
         //Connvertir IformFile a byte[]

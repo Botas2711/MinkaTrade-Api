@@ -1,4 +1,5 @@
-﻿using _1._API.Request;
+﻿using _1._API.Filter;
+using _1._API.Request;
 using _1._API.Response;
 using _2._Domain.Posts;
 using _3._Data.Model;
@@ -30,6 +31,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<List<PostResponse>> GetAll()
         {
             var posts = await _postData.GetAllAsycnc();
@@ -44,6 +46,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("client/{clientId}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<List<PostResponse>> GetAllByClientId(int clientId)
         {
             var posts = await _postDomain.GetAllByClientIdAsync(clientId);
@@ -57,6 +60,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("title/{title}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<List<PostResponse>> GetAllByTitle(string title)
         {
             var posts = await _postDomain.GetAllByTitleAsync(title);
@@ -70,6 +74,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("status/{status}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<List<PostResponse>> GetAllByStatus(bool status)
         {
             var posts = await _postDomain.GetAllByStatusAsync(status);
@@ -83,6 +88,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("category/{categoryId}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<List<PostResponse>> GetAllByCategory(int categoryId)
         {
             var posts = await _postDomain.GetAllByCategoryIdAsync(categoryId);
@@ -96,6 +102,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("rangePrice/initial/{initalPrice}/final/{finalPrice}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<List<PostResponse>> GetAllByRangePrice(decimal initalPrice, decimal finalPrice)
         {
             var posts = await _postDomain.GetAllByRangePriceAsync(initalPrice, finalPrice);
@@ -109,6 +116,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("rangeDate/initial/{initialDate}/final/{finalDate}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<List<PostResponse>> GetAllByRangeDate(DateTime initialDate, DateTime finalDate)
         {
             var posts = await _postDomain.GetAllByRangeDateAsync(initialDate, finalDate);
@@ -122,6 +130,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("{id}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<PostResponse> Get(int id)
         {
             var post = await _postDomain.GetByIdAsync(id);
@@ -134,6 +143,7 @@ namespace _1._API.Controllers
         /// Register a post
         /// </summary>
         [HttpPost]
+        [Authorize("user")]
         public async Task<IActionResult> Post([FromBody] PostRequest request)
         {
             if (ModelState.IsValid)
@@ -153,6 +163,7 @@ namespace _1._API.Controllers
         /// Update a post
         /// </summary>
         [HttpPut("{id}")]
+        [Authorize("user")]
         public async Task<IActionResult> Put(int id, [FromBody] PostRequest request)
         {
             if (ModelState.IsValid)
@@ -172,6 +183,7 @@ namespace _1._API.Controllers
         /// Delete a post
         /// </summary>
         [HttpDelete("{id}")]
+        [Authorize("admin,user")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _postDomain.DeleteAsync(id);

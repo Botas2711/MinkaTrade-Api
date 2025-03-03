@@ -21,6 +21,7 @@ namespace _3._Data.Context
         public DbSet<Message> Messages { get; set; }
         public DbSet<Premiun> Premiuns { get; set; }
         public DbSet<Suscription> Suscriptions { get; set; }
+        public DbSet<User> Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -125,6 +126,15 @@ namespace _3._Data.Context
             builder.Entity<Suscription>().Property(p => p.Id).ValueGeneratedOnAdd();
             builder.Entity<Suscription>().Property(p => p.StartTime).HasDefaultValue(DateTime.Now);
             builder.Entity<Suscription>().Property(p => p.EndTime).HasDefaultValue(DateTime.Now.AddDays(30));
+
+            //User
+            builder.Entity<User>().ToTable("Users");
+            builder.Entity<User>().HasKey(p => p.Id);
+            builder.Entity<User>().Property(p => p.Id).ValueGeneratedOnAdd();
+            builder.Entity<User>().Property(p => p.Username).IsRequired().HasMaxLength(40);
+            builder.Entity<User>().Property(p => p.Password).IsRequired().HasMaxLength(40);
+            builder.Entity<User>().Property(p => p.CreatedDate).HasDefaultValue(DateTime.Now);
+            builder.Entity<User>().Property(p => p.Enabled).HasDefaultValue(true);
         }
     }
 }

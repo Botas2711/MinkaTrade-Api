@@ -1,4 +1,5 @@
-﻿using _1._API.Request;
+﻿using _1._API.Filter;
+using _1._API.Request;
 using _1._API.Response;
 using _2._Domain.Premiuns;
 using _3._Data.Model;
@@ -30,6 +31,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("{id}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<PremiunResponse> Get(int id)
         {
             var premiun = await _premiunDomain.GetByIdAsync(id);
@@ -42,6 +44,7 @@ namespace _1._API.Controllers
         /// Register a premiun
         /// </summary>
         [HttpPost]
+        [Authorize("admin")]
         public async Task<IActionResult> Post([FromBody] PremiunRequest request)
         {
             if (ModelState.IsValid)
@@ -61,6 +64,7 @@ namespace _1._API.Controllers
         /// Update a premiun
         /// </summary>
         [HttpPut("{id}")]
+        [Authorize("admin")]
         public async Task<IActionResult> Put(int id, [FromBody] PremiunRequest request)
         {
             if (ModelState.IsValid)

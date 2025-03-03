@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2. Domain", "2. Domain\2. D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3. Data", "3. Data\3. Data.csproj", "{78064731-BD83-4758-86B1-52AFB965C98E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1. API.Tests", "1. API.Tests\1. API.Tests.csproj", "{2AC4C245-3412-43DF-94CB-436718D9C656}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "1. API.Tests", "1. API.Tests\1. API.Tests.csproj", "{2AC4C245-3412-43DF-94CB-436718D9C656}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2. Domain.Tests", "2. Domain.Tests\2. Domain.Tests.csproj", "{0E7B3FDB-D546-4186-8177-960B1D5B2A54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2. Domain.Tests", "2. Domain.Tests\2. Domain.Tests.csproj", "{0E7B3FDB-D546-4186-8177-960B1D5B2A54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3. Data.Tests", "3. Data.Tests\3. Data.Tests.csproj", "{B0685C31-0A2F-4FB6-BFC8-8F5532CB050E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3. Data.Tests", "3. Data.Tests\3. Data.Tests.csproj", "{B0685C31-0A2F-4FB6-BFC8-8F5532CB050E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

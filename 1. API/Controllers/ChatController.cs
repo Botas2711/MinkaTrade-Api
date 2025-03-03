@@ -1,4 +1,5 @@
-﻿using _1._API.Request;
+﻿using _1._API.Filter;
+using _1._API.Request;
 using _1._API.Response;
 using _2._Domain.Chats;
 using _3._Data.Chats;
@@ -30,6 +31,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet]
         [Produces("application/json")]
+        [Authorize("admin")]
         public async Task<List<ChatResponse>> GetAll()
         {
             var chats = await _chatData.GetAllAsycnc();
@@ -43,6 +45,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("client/{clientId}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<List<ChatResponse>> GetAllByClientId(int clientId)
         {
             var chats = await _chatDomain.GetAllByClientIdAsync(clientId);
@@ -56,6 +59,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("{id}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<ChatResponse> Get(int id)
         {
             var chat = await _chatDomain.GetByIdAsync(id);
@@ -68,6 +72,7 @@ namespace _1._API.Controllers
         /// Register a chat
         /// </summary>
         [HttpPost]
+        [Authorize("user")]
         public async Task<IActionResult> Post([FromBody] ChatRequest request)
         {
             if (ModelState.IsValid)

@@ -1,4 +1,5 @@
-﻿using _1._API.Request;
+﻿using _1._API.Filter;
+using _1._API.Request;
 using _1._API.Response;
 using _2._Domain.Reviews;
 using _3._Data.Model;
@@ -30,6 +31,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("{id}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<ReviewResponse> Get(int id)
         {
             var review = await _reviewDomain.GetByIdAsync(id);
@@ -43,6 +45,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("client/{clientId}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<List<ReviewResponse>> GetByClientId(int clientId)
         {
             var reviews = await _reviewDomain.GetAllByClientIdAsync(clientId);
@@ -56,6 +59,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("orderDesc/{clientId}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<List<ReviewResponse>> GetAllOrderByRateDesc(int clientId)
         {
             var reviews = await _reviewDomain.GetAllOrderByRateDescAsync(clientId);
@@ -69,6 +73,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("orderAsc/{clientId}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<List<ReviewResponse>> GetAllOrderByRateAsc(int clientId)
         {
             var reviews = await _reviewDomain.GetAllOrderByRateAscAsync(clientId);
@@ -81,6 +86,7 @@ namespace _1._API.Controllers
         /// Register a review
         /// </summary>
         [HttpPost]
+        [Authorize("user")]
         public async Task<IActionResult> Post([FromBody] ReviewRequest request)
         {
             if (ModelState.IsValid)
@@ -100,6 +106,7 @@ namespace _1._API.Controllers
         /// Update a review
         /// </summary>
         [HttpPut("{id}")]
+        [Authorize("user")]
         public async Task<IActionResult> Put(int id, [FromBody] ReviewRequest request)
         {
             if (ModelState.IsValid)
@@ -119,6 +126,7 @@ namespace _1._API.Controllers
         /// Delete a review
         /// </summary>
         [HttpDelete("{id}")]
+        [Authorize("admin,user")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _reviewDomain.DeleteAsync(id);

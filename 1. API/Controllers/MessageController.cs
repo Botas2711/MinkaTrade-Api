@@ -1,4 +1,5 @@
-﻿using _1._API.Request;
+﻿using _1._API.Filter;
+using _1._API.Request;
 using _1._API.Response;
 using _2._Domain.Messages;
 using _3._Data.Messages;
@@ -30,6 +31,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet]
         [Produces("application/json")]
+        [Authorize("admin")]
         public async Task<List<MessageReponse>> GetAll()
         {
             var messages = await _messageData.GetAllAsycnc();
@@ -43,6 +45,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("{id}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<MessageReponse> Get(int id)
         {
             var message = await _messageDomain.GetByIdAsync(id);
@@ -56,6 +59,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("chat/{chatId}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<List<MessageReponse>> GetAllByChat(int chatId)
         {
             var messages = await _messageDomain.GetAllByChatIdAsync(chatId);
@@ -68,6 +72,7 @@ namespace _1._API.Controllers
         /// Register a message
         /// </summary>
         [HttpPost]
+        [Authorize("user")]
         public async Task<IActionResult> Post([FromBody] MessageRequest request)
         {
             if (ModelState.IsValid)
@@ -87,6 +92,7 @@ namespace _1._API.Controllers
         /// Update a message
         /// </summary>
         [HttpPut("{id}")]
+        [Authorize("user")]
         public async Task<IActionResult> Put(int id, [FromBody] MessageRequest request)
         {
             if (ModelState.IsValid)

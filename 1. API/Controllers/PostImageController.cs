@@ -1,4 +1,5 @@
-﻿using _1._API.Request;
+﻿using _1._API.Filter;
+using _1._API.Request;
 using _1._API.Response;
 using _2._Domain.PostImages;
 using _3._Data.Model;
@@ -30,6 +31,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("post/{posId}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<List<PostImageResponse>> GetAll(int posId)
         {
             var postImages = await _postImageDomain.GetAllByPostIdAsync(posId);
@@ -43,6 +45,7 @@ namespace _1._API.Controllers
         /// </summary>
         [HttpGet("{id}")]
         [Produces("application/json")]
+        [Authorize("admin,user")]
         public async Task<PostImageResponse> Get(int id)
         {
             var postImage = await _postImageDomain.GetByIdAsync(id);
@@ -55,6 +58,7 @@ namespace _1._API.Controllers
         /// Register a post image
         /// </summary>
         [HttpPost]
+        [Authorize("user")]
         public async Task<IActionResult> Post([FromForm] PostImageRequest request)
         {
             if (ModelState.IsValid)
@@ -74,6 +78,7 @@ namespace _1._API.Controllers
         /// Update a post image
         /// </summary>
         [HttpPut("{id}")]
+        [Authorize("user")]
         public async Task<IActionResult> Put(int id, [FromForm] PostImageRequest request)
         {
             if (ModelState.IsValid)
@@ -93,6 +98,7 @@ namespace _1._API.Controllers
         /// Delete a post image
         /// </summary>
         [HttpDelete("{id}")]
+        [Authorize("admin,user")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _postImageDomain.DeleteAsync(id);

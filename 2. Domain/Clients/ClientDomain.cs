@@ -1,4 +1,5 @@
 ﻿using _2._Domain.Exceptions;
+using _2._Domain.Users;
 using _3._Data.Clients;
 using _3._Data.Model;
 using System;
@@ -14,9 +15,11 @@ namespace _2._Domain.Clients
     public class ClientDomain : IClientDomain
     {
         private IClientData _clientData;
-        public ClientDomain(IClientData clientData)
+        private IUserDomain _userDomain;
+        public ClientDomain(IClientData clientData, IUserDomain userDomain)
         {
             _clientData = clientData;
+            _userDomain = userDomain;
         }
         private int CalculateAge(DateTime birthdate)
         {
@@ -27,6 +30,7 @@ namespace _2._Domain.Clients
         }
         public async Task<bool> CreateAsync(Client client)
         {
+            await _userDomain.GetByIdAsync(client.UserId);
             if (string.IsNullOrWhiteSpace(client.PhoneNumber) || client.PhoneNumber.Length != 9)
             {
                 throw new InvalidActionException("The phone number must have exactly 9 numbers");
@@ -72,6 +76,7 @@ namespace _2._Domain.Clients
 
         public async Task<bool> UpdateAsync(Client client, int id)
         {
+            await _userDomain.GetByIdAsync(client.UserId);
             await GetByIdAsync(id);
 
             if (string.IsNullOrWhiteSpace(client.PhoneNumber) || client.PhoneNumber.Length != 9)
